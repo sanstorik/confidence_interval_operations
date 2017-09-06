@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="9dp"
     tools:context="com.example.chloe.confidence_interval_operations.MainActivity">
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_marginLeft="49dp"
         android:layout_marginStart="49dp"
         android:layout_marginTop="18dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="Interval A"
         android:textSize="25sp"
         tools:text="Interval A" />
@@ -30,6 +32,7 @@
         android:layout_marginStart="68dp"
         android:layout_toEndOf="@+id/intervalB_tv"
         android:layout_toRightOf="@+id/intervalB_tv"
+        android:fontFamily="sans-serif-condensed"
         android:text="Interval B"
         android:textSize="25sp"
         tools:text="Interval B" />
@@ -60,19 +63,16 @@
         android:hint="0;0"
         android:inputType="text"
         android:textSize="25sp" />
-    
-    <com.example.chloe.confidence_interval_operations.ToogleButtonGroupTableLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <com.example.chloe.confidence_interval_operations.ToogleButtonGroupTableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radGroup1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radGroup1"
-        android:layout_below="@+id/intervalA_et"
         android:layout_alignLeft="@+id/intervalA_et"
-        android:layout_alignStart="@+id/intervalA_et">
+        android:layout_alignStart="@+id/intervalA_et"
+        android:layout_below="@+id/intervalA_et">
 
         <TableRow
-            layout_height="match_parent"
-            layout_width="match_parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -80,14 +80,14 @@
                 android:id="@+id/add_rb"
                 android:layout_height="wrap_content"
                 android:text="Додавання"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/add_A_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Додавання до А"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/addNumber_et"
@@ -108,8 +108,6 @@
         </TableRow>
 
         <TableRow
-            layout_height="match_parent"
-            layout_width="match_parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -117,14 +115,14 @@
                 android:id="@+id/substr_rb"
                 android:layout_height="wrap_content"
                 android:text="Віднімання"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/substr_B_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Віднімання від B"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/substractNumber_et"
@@ -146,8 +144,6 @@
         </TableRow>
 
         <TableRow
-            layout_height="match_parent"
-            layout_width="match_parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -155,20 +151,20 @@
                 android:id="@+id/mul_rb"
                 android:layout_height="wrap_content"
                 android:text="Множення"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/mul_A_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Множення А на число"
-                android:textSize="13dp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/multiplyNumber_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-10dp"
+                android:layout_marginLeft="0dp"
                 android:width="50dp"
                 android:ems="10"
                 android:inputType="number"
@@ -178,13 +174,11 @@
                 android:id="@+id/reverse_A_rb"
                 android:layout_height="wrap_content"
                 android:text="Відображення А"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
         </TableRow>
 
         <TableRow
-            layout_height="match_parent"
-            layout_width="match_parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -192,14 +186,14 @@
                 android:id="@+id/divide_rb"
                 android:layout_height="wrap_content"
                 android:text="Ділення"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/divide_B_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Ділення B на число"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/divideNumber_et"
@@ -216,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:text="Інверсія B"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
         </TableRow>
 
@@ -226,17 +220,49 @@
                 android:id="@+id/div_thesis_rb"
                 android:layout_height="wrap_content"
                 android:text="Ділення(гіпотеза)"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/mul_many_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Множення декількох"
-                android:textSize="15dp" />
+                android:textSize="13sp" />
 
-    </TableRow>
+        </TableRow>
 
     </com.example.chloe.confidence_interval_operations.ToogleButtonGroupTableLayout>
+
+    <Button
+        android:id="@+id/exec_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/res_to_B_btn"
+        android:layout_alignEnd="@+id/res_to_B_btn"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/res_to_B_btn"
+        android:layout_marginEnd="58dp"
+        android:layout_marginRight="58dp"
+        android:text="Execute" />
+
+    <Button
+        android:id="@+id/res_to_B_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radGroup1"
+        android:layout_alignEnd="@+id/radGroup1"
+        android:layout_alignRight="@+id/radGroup1"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Result to B" />
+
+    <Button
+        android:id="@+id/res_to_A_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radGroup1"
+        android:layout_toLeftOf="@+id/res_to_B_btn"
+        android:layout_toStartOf="@+id/res_to_B_btn"
+        android:text="Result to A" />
 
 </RelativeLayout>
