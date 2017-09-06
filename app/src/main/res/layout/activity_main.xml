@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="9dp"
     tools:context="com.example.chloe.confidence_interval_operations.MainActivity">
 
     <TextView
@@ -45,6 +44,7 @@
         android:layout_alignStart="@+id/intervalB_tv"
         android:layout_below="@+id/intervalA_tv"
         android:layout_toLeftOf="@+id/intervalA_tv"
+        android:layout_toStartOf="@+id/intervalA_tv"
         android:ems="10"
         android:hint="0;0"
         android:inputType="text"
@@ -79,6 +79,7 @@
             <RadioButton
                 android:id="@+id/add_rb"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="Додавання"
                 android:textSize="15sp" />
 
@@ -86,6 +87,7 @@
                 android:id="@+id/add_A_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Додавання до А"
                 android:textSize="13sp" />
 
@@ -93,10 +95,11 @@
                 android:id="@+id/addNumber_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-30dp"
+                android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:textSize="15sp" />
 
             <RadioButton
@@ -121,6 +124,7 @@
                 android:id="@+id/substr_B_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Віднімання від B"
                 android:textSize="13sp" />
 
@@ -128,16 +132,17 @@
                 android:id="@+id/substractNumber_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-30dp"
+                android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/min_rb"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
                 android:text="Мінімум"
                 android:textSize="15sp" />
 
@@ -157,6 +162,7 @@
                 android:id="@+id/mul_A_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Множення А на число"
                 android:textSize="12sp" />
 
@@ -164,10 +170,11 @@
                 android:id="@+id/multiplyNumber_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
                 android:width="50dp"
                 android:ems="10"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:textSize="15sp" />
 
             <RadioButton
@@ -192,6 +199,7 @@
                 android:id="@+id/divide_B_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Ділення B на число"
                 android:textSize="13sp" />
 
@@ -199,16 +207,17 @@
                 android:id="@+id/divideNumber_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-25dp"
+                android:layout_marginStart="-5dp"
                 android:width="50dp"
                 android:ems="10"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/inverse_B_rb"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
                 android:text="Інверсія B"
                 android:textSize="15sp" />
 
@@ -226,6 +235,7 @@
                 android:id="@+id/mul_many_rb"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Множення декількох"
                 android:textSize="13sp" />
 
