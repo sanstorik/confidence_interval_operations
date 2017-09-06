@@ -79,7 +79,7 @@
             <RadioButton
                 android:id="@+id/add_rb"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:checked="false"
                 android:text="Додавання"
                 android:textSize="15sp" />
 
@@ -98,6 +98,7 @@
                 android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
+                android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
                 android:textSize="15sp" />
@@ -135,6 +136,7 @@
                 android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
+                android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
                 android:textSize="15sp" />
@@ -173,6 +175,7 @@
                 android:layout_marginStart="0dp"
                 android:width="50dp"
                 android:ems="10"
+                android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
                 android:textSize="15sp" />
@@ -210,6 +213,7 @@
                 android:layout_marginStart="-5dp"
                 android:width="50dp"
                 android:ems="10"
+                android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
                 android:textSize="15sp" />
@@ -228,7 +232,7 @@
             <RadioButton
                 android:id="@+id/div_thesis_rb"
                 android:layout_height="wrap_content"
-                android:text="Ділення(гіпотеза)"
+                android:text="Гіпотеза"
                 android:textSize="15sp" />
 
             <RadioButton
@@ -247,32 +251,44 @@
         android:id="@+id/exec_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/res_to_B_btn"
+        android:text="Execute"
+        android:layout_above="@+id/intervalB_et"
+        android:layout_alignLeft="@+id/res_to_A_btn"
+        android:layout_alignStart="@+id/res_to_A_btn"
+        android:layout_alignRight="@+id/res_to_A_btn"
+        android:layout_alignEnd="@+id/res_to_A_btn" />
+
+    <Button
+        android:id="@+id/graph_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/intervalB_et"
         android:layout_alignEnd="@+id/res_to_B_btn"
-        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/res_to_B_btn"
         android:layout_alignRight="@+id/res_to_B_btn"
-        android:layout_marginEnd="58dp"
-        android:layout_marginRight="58dp"
-        android:text="Execute" />
+        android:layout_alignStart="@+id/res_to_B_btn"
+        android:text="Graph" />
 
     <Button
         android:id="@+id/res_to_B_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/radGroup1"
-        android:layout_alignEnd="@+id/radGroup1"
-        android:layout_alignRight="@+id/radGroup1"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_below="@id/graph_btn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:text="Result to B" />
 
     <Button
         android:id="@+id/res_to_A_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/radGroup1"
+        android:text="Result to A"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/exec_btn"
         android:layout_toLeftOf="@+id/res_to_B_btn"
-        android:layout_toStartOf="@+id/res_to_B_btn"
-        android:text="Result to A" />
+        android:layout_toStartOf="@+id/res_to_B_btn" />
 
 </RelativeLayout>
