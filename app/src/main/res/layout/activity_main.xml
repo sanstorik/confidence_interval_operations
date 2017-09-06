@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,12 +7,236 @@
     tools:context="com.example.chloe.confidence_interval_operations.MainActivity">
 
     <TextView
+        android:id="@+id/intervalB_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="18dp"
+        android:text="Interval A"
+        android:textSize="25sp"
+        tools:text="Interval A" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/intervalA_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/intervalB_tv"
+        android:layout_alignBottom="@+id/intervalB_tv"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:layout_toEndOf="@+id/intervalB_tv"
+        android:layout_toRightOf="@+id/intervalB_tv"
+        android:text="Interval B"
+        android:textSize="25sp"
+        tools:text="Interval B" />
+
+    <EditText
+        android:id="@+id/intervalA_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/intervalB_tv"
+        android:layout_alignStart="@+id/intervalB_tv"
+        android:layout_below="@+id/intervalA_tv"
+        android:layout_toLeftOf="@+id/intervalA_tv"
+        android:ems="10"
+        android:hint="0;0"
+        android:inputType="text"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/intervalB_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/intervalA_tv"
+        android:layout_alignLeft="@+id/intervalA_tv"
+        android:layout_alignRight="@+id/intervalA_tv"
+        android:layout_alignStart="@+id/intervalA_tv"
+        android:layout_below="@+id/intervalB_tv"
+        android:ems="10"
+        android:hint="0;0"
+        android:inputType="text"
+        android:textSize="25sp" />
+    
+    <com.example.chloe.confidence_interval_operations.ToogleButtonGroupTableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radGroup1"
+        android:layout_below="@+id/intervalA_et"
+        android:layout_alignLeft="@+id/intervalA_et"
+        android:layout_alignStart="@+id/intervalA_et">
+
+        <TableRow
+            layout_height="match_parent"
+            layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/add_rb"
+                android:layout_height="wrap_content"
+                android:text="Додавання"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/add_A_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Додавання до А"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/addNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-30dp"
+                android:width="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/max_rb"
+                android:layout_height="wrap_content"
+                android:text="Максимум"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+        <TableRow
+            layout_height="match_parent"
+            layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/substr_rb"
+                android:layout_height="wrap_content"
+                android:text="Віднімання"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/substr_B_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Віднімання від B"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/substractNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-30dp"
+                android:width="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/min_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:text="Мінімум"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+        <TableRow
+            layout_height="match_parent"
+            layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/mul_rb"
+                android:layout_height="wrap_content"
+                android:text="Множення"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/mul_A_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Множення А на число"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/multiplyNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-10dp"
+                android:width="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/reverse_A_rb"
+                android:layout_height="wrap_content"
+                android:text="Відображення А"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            layout_height="match_parent"
+            layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/divide_rb"
+                android:layout_height="wrap_content"
+                android:text="Ділення"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/divide_B_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Ділення B на число"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/divideNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-25dp"
+                android:width="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/inverse_B_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:text="Інверсія B"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <RadioButton
+                android:id="@+id/div_thesis_rb"
+                android:layout_height="wrap_content"
+                android:text="Ділення(гіпотеза)"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/mul_many_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Множення декількох"
+                android:textSize="15dp" />
+
+    </TableRow>
+
+    </com.example.chloe.confidence_interval_operations.ToogleButtonGroupTableLayout>
+
+</RelativeLayout>
