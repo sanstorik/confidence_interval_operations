@@ -16,6 +16,8 @@ class ConfidenceInterval private constructor(
 
     override fun hashCode() = leftBound.toInt() * 31 xor rightBound.toInt() * 31
 
+    override fun toString() = "leftBound = $leftBound, rightBound = $rightBound"
+
     companion object {
         @JvmStatic
         fun of(leftBound: Double, rightBound: Double): Interval {

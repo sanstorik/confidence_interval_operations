@@ -10,6 +10,8 @@ class ClearNumber private constructor(val number: Double): Interval {
         else -> number == (other as ClearNumber).number
     }
 
+    override fun toString() = "clear number = $number"
+
     companion object {
         @JvmStatic
         fun of(number: Double): Interval {
