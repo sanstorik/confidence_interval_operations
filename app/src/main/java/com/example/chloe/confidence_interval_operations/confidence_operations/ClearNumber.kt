@@ -14,8 +14,8 @@ class ClearNumber private constructor(val number: Double): Interval {
 
     companion object {
         @JvmStatic
-        fun of(number: Double): Interval {
-            return ClearNumber(number)
+        fun of(number: Number): Interval {
+            return ClearNumber(number.toDouble())
         }
     }
 }

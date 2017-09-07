@@ -43,8 +43,9 @@
         android:layout_alignLeft="@+id/intervalB_tv"
         android:layout_alignStart="@+id/intervalB_tv"
         android:layout_below="@+id/intervalA_tv"
-        android:layout_toLeftOf="@+id/intervalA_tv"
-        android:layout_toStartOf="@+id/intervalA_tv"
+        android:layout_marginEnd="30dp"
+        android:layout_toLeftOf="@+id/intervalB_et"
+        android:layout_toStartOf="@+id/intervalB_et"
         android:ems="10"
         android:hint="0;0"
         android:inputType="text"
@@ -54,17 +55,18 @@
         android:id="@+id/intervalB_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/intervalA_tv"
         android:layout_alignLeft="@+id/intervalA_tv"
-        android:layout_alignRight="@+id/intervalA_tv"
         android:layout_alignStart="@+id/intervalA_tv"
         android:layout_below="@+id/intervalB_tv"
+        android:layout_marginEnd="10dp"
+        android:layout_toLeftOf="@+id/exec_btn"
+        android:layout_toStartOf="@+id/exec_btn"
         android:ems="10"
         android:hint="0;0"
         android:inputType="text"
         android:textSize="25sp" />
 
-    <com.example.chloe.confidence_interval_operations.ToogleButtonGroupTableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.example.chloe.confidence_interval_operations.ToggleButtonGroupTableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/radGroup1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,6 +100,7 @@
                 android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
@@ -136,6 +139,7 @@
                 android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
@@ -175,6 +179,7 @@
                 android:layout_marginStart="0dp"
                 android:width="50dp"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
@@ -213,6 +218,7 @@
                 android:layout_marginStart="-5dp"
                 android:width="50dp"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="0"
                 android:inputType="number"
                 android:textAlignment="center"
@@ -245,7 +251,7 @@
 
         </TableRow>
 
-    </com.example.chloe.confidence_interval_operations.ToogleButtonGroupTableLayout>
+    </com.example.chloe.confidence_interval_operations.ToggleButtonGroupTableLayout>
 
     <Button
         android:id="@+id/exec_btn"

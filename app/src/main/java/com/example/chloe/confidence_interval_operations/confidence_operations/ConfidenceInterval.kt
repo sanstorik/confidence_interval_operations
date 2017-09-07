@@ -20,8 +20,8 @@ class ConfidenceInterval private constructor(
 
     companion object {
         @JvmStatic
-        fun of(leftBound: Double, rightBound: Double): Interval {
-            return ConfidenceInterval(leftBound, rightBound)
+        fun of(leftBound: Number, rightBound: Number): Interval {
+            return ConfidenceInterval(leftBound.toDouble(), rightBound.toDouble())
         }
     }
 }

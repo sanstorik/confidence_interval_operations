@@ -4,6 +4,10 @@ import com.example.chloe.confidence_interval_operations.confidence_operations.Cl
 import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.Interval
 
+public enum class OperationType {
+    BINARY_OPERATION, UNARY_OPERATION, MULTIPLE_OPERATION
+}
+
 class AddingIntervalsOperation: BinaryIntervalOperation {
 
     override fun execute(first: Interval, second: Interval) =

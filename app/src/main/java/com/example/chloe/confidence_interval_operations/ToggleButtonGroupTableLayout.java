@@ -7,15 +7,19 @@ import android.widget.RadioButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-public class ToogleButtonGroupTableLayout extends TableLayout implements View.OnClickListener {
+public class ToggleButtonGroupTableLayout extends TableLayout implements View.OnClickListener {
+    public interface ToggleActionListener {
+        public void OnToogleClicked(int radioButtonId);
+    }
 
     private static final String TAG = "ToggleButtonGroupTableLayout";
     private RadioButton activeRadioButton;
+    private ToggleActionListener _listener;
 
     /**
      * @param context
      */
-    public ToogleButtonGroupTableLayout(Context context) {
+    public ToggleButtonGroupTableLayout(Context context) {
         super(context);
 
     }
@@ -24,7 +28,7 @@ public class ToogleButtonGroupTableLayout extends TableLayout implements View.On
      * @param context
      * @param attrs
      */
-    public ToogleButtonGroupTableLayout(Context context, AttributeSet attrs) {
+    public ToggleButtonGroupTableLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
     }
@@ -36,6 +40,10 @@ public class ToogleButtonGroupTableLayout extends TableLayout implements View.On
         }
         rb.setChecked(true);
         activeRadioButton = rb;
+
+        if (_listener != null) {
+            _listener.OnToogleClicked(rb.getId());
+        }
     }
 
 
@@ -69,5 +77,9 @@ public class ToogleButtonGroupTableLayout extends TableLayout implements View.On
         }
 
         return -1;
+    }
+
+    public void setToggleListener(ToggleActionListener listener) {
+        _listener = listener;
     }
 }
