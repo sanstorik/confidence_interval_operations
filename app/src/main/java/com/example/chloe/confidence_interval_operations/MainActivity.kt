@@ -1,6 +1,8 @@
 package com.example.chloe.confidence_interval_operations
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -43,6 +45,15 @@ class MainActivity : Activity(), MainActivityView {
         res_to_B_btn.setOnClickListener { _presenter.resultToB() }
     }
 
+    override fun showErrorMessage(msg: String) {
+        AlertDialog.Builder(this)
+                .setTitle("Input error")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(msg)
+                .setPositiveButton("OK", { dialogInterface, i ->  dialogInterface.cancel() })
+                .show()
+    }
+
     private fun onToggleClicked(id: Int) {
         disableInput()
 
@@ -54,11 +65,11 @@ class MainActivity : Activity(), MainActivityView {
             R.id.div_thesis_rb -> _presenter.setBinaryOperation(HypothesisIntervalsOperation())
 
             R.id.add_A_rb -> {
-                _presenter.setBinaryOperation(AddingIntervalsOperation())
+                _presenter.setBinaryOperation(AddingClearNumberToIntervalOperation())
                 enableInput(addNumber_et)
             }
             R.id.substr_B_rb -> {
-                _presenter.setBinaryOperation(SubstractInvervalsOperations())
+                _presenter.setBinaryOperation(SubstractClearNumberFromIntervalOperation())
                 enableInput(substractNumber_et)
             }
             R.id.mul_A_rb -> {
@@ -102,6 +113,8 @@ interface MainActivityView {
     val multiplyNumberInput: Double
     val addNumberInput: Double
     val substractNumberInput: Double
+
+    fun showErrorMessage(msg: String)
 }
 
 

@@ -32,19 +32,56 @@ class MainActivityPresenter (private val _view: MainActivityView) {
     public fun executeOnClick() {
         when(_currentOperation) {
             OperationType.BINARY_OPERATION -> {
-                var leftOperand = transformStringToInterval(_view.intervalA)
-                var rightOperand = transformStringToInterval(_view.intervalB)
+                if (!areIntervalsProperlyFilled()) {
+                    _view.showErrorMessage("Fill intervals in form 0;0")
+                    return
+                }
 
-                if (_binaryOperation!!::class.java == MultiplyOnClearNumberOperation::class.java) {
-                    rightOperand = ClearNumber.of(_view.multiplyNumberInput)
-                } else if (_binaryOperation!!::class.java == DivideOnClearNumberOperation::class.java) {
-                    rightOperand = ClearNumber.of(_view.divideNumberInput)
+                var leftOperand = transformStringToInterval(_view.intervalA)
+                val rightOperand = when (_binaryOperation!!::class.java) {
+                    MultiplyOnClearNumberOperation::class.java -> {
+                        ClearNumber.of(_view.multiplyNumberInput)
+                    }
+                    DivideOnClearNumberOperation::class.java -> {
+                        if (_view.divideNumberInput == 0.0) {
+                            _view.showErrorMessage("Number is zero")
+                        }
+                        leftOperand = transformStringToInterval(_view.intervalB)
+                        ClearNumber.of(_view.divideNumberInput)
+                    }
+                    AddingClearNumberToIntervalOperation::class.java -> {
+                        ClearNumber.of(_view.addNumberInput)
+                    }
+                    SubstractClearNumberFromIntervalOperation::class.java -> {
+                        leftOperand = transformStringToInterval(_view.intervalB)
+                        ClearNumber.of(_view.substractNumberInput)
+                    }
+                    else -> transformStringToInterval(_view.intervalB)
                 }
 
                 _result = _binaryOperation?.execute(leftOperand, rightOperand)
             }
             OperationType.UNARY_OPERATION -> {
+                if (!areIntervalsProperlyFilled()) {
+                    _view.showErrorMessage("Fill intervals in form 0;0")
+                    return;
+                }
 
+                val operand = when (_unaryOperation!!::class.java) {
+                    InversionIntervalOperation::class.java -> {
+                        val interval = transformStringToInterval(_view.intervalB)
+                        if (interval.leftBound == 0.0 || interval.rightBound == 0.0) {
+                            _view.showErrorMessage("interval bound should not be zero")
+                        }
+                        transformStringToInterval(_view.intervalB)
+                    }
+                    ReverseIntervalOperation::class.java -> {
+                        transformStringToInterval(_view.intervalA)
+                    }
+                    else -> throw IllegalStateException("no such unary operation")
+                }
+
+                _result = _unaryOperation?.execute(operand)
             }
             OperationType.MULTIPLE_OPERATION -> {
 
@@ -80,5 +117,17 @@ class MainActivityPresenter (private val _view: MainActivityView) {
         return ConfidenceInterval.of(arr[0].toDouble(), arr[1].toDouble())
     }
 
-    private fun transformIntervalToString(interval: Interval) = "${interval.leftBound};${interval.rightBound}"
+    private fun transformIntervalToString(interval: Interval) =
+            String.format("%.2f;%.2f", interval.leftBound, interval.rightBound)
+
+    private fun areIntervalsProperlyFilled() =
+            intervalIsProperlyFilled(_view.intervalA)
+                && intervalIsProperlyFilled(_view.intervalB)
+
+
+    private fun intervalIsProperlyFilled(interval: String): Boolean {
+        val arr = interval.split(';')
+
+        return arr.size == 2 && arr[0].toDoubleOrNull() != null && arr[1].toDoubleOrNull() != null
+    }
 }

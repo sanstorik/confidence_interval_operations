@@ -8,7 +8,7 @@ public enum class OperationType {
     BINARY_OPERATION, UNARY_OPERATION, MULTIPLE_OPERATION
 }
 
-class AddingIntervalsOperation: BinaryIntervalOperation {
+open class AddingIntervalsOperation: BinaryIntervalOperation {
 
     override fun execute(first: Interval, second: Interval) =
              ConfidenceInterval.of(
@@ -18,12 +18,18 @@ class AddingIntervalsOperation: BinaryIntervalOperation {
 }
 
 
-class SubstractInvervalsOperations: BinaryIntervalOperation {
+class AddingClearNumberToIntervalOperation: AddingIntervalsOperation()
+
+
+open class SubstractInvervalsOperations: BinaryIntervalOperation {
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
                     first.leftBound - second.rightBound,
                     first.rightBound - second.leftBound)
 }
+
+
+class SubstractClearNumberFromIntervalOperation: SubstractInvervalsOperations()
 
 
 class ReverseIntervalOperation: UnaryIntervalOperation {
