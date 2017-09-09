@@ -3,10 +3,13 @@ package com.example.chloe.confidence_interval_operations
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.operations.*
+import com.example.chloe.confidence_interval_operations.interval_array_input.ConfidenceArrayListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -43,6 +46,24 @@ class MainActivity : Activity(), MainActivityView {
         exec_btn.setOnClickListener { _presenter.executeOnClick() }
         res_to_A_btn.setOnClickListener { _presenter.resultToA() }
         res_to_B_btn.setOnClickListener { _presenter.resultToB() }
+
+        disableResultButtons()
+
+        if (intent.extras != null) {
+            val array = intent.extras.getBundle("intervalList").getDoubleArray("intervalValues")
+            Log.i("tag", array.size.toString() + " hui ")
+            _presenter.transformDoubleArrayToResult(array)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putString("intervalA", intervalA)
+        outState?.putString("intervalB", intervalB)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        intervalA = savedInstanceState?.getString("intervalA")!!
+        intervalB = savedInstanceState.getString("intervalB")!!
     }
 
     override fun showErrorMessage(msg: String) {
@@ -50,9 +71,23 @@ class MainActivity : Activity(), MainActivityView {
                 .setTitle("Input error")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(msg)
-                .setPositiveButton("OK", { dialogInterface, i ->  dialogInterface.cancel() })
+                .setPositiveButton("OK", { dialogInterface, _ ->  dialogInterface.cancel() })
                 .show()
     }
+
+    override fun enableResultButtons() {
+        res_to_A_btn.isEnabled = true
+        res_to_B_btn.isEnabled = true
+    }
+
+    override fun disableResultButtons() {
+        res_to_A_btn.isEnabled = false
+        res_to_B_btn.isEnabled = false
+    }
+
+
+    private fun openIntervalListInputActivity() =
+            startActivity(Intent(this, ConfidenceArrayListActivity::class.java))
 
     private fun onToggleClicked(id: Int) {
         disableInput()
@@ -81,7 +116,7 @@ class MainActivity : Activity(), MainActivityView {
                 enableInput(divideNumber_et)
             }
 
-            R.id.mul_many_rb -> _presenter.setMultipleOperation(MultipleIntervalMultiplyOperation())
+            R.id.mul_many_rb -> openIntervalListInputActivity()
 
             R.id.max_rb -> _presenter.setBinaryOperation(FindMaxIntervalOperation())
             R.id.min_rb -> _presenter.setBinaryOperation(FindMinIntervalOperation())
@@ -115,6 +150,9 @@ interface MainActivityView {
     val substractNumberInput: Double
 
     fun showErrorMessage(msg: String)
+
+    fun enableResultButtons()
+    fun disableResultButtons()
 }
 
 

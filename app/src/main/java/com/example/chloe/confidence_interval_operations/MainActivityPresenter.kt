@@ -56,11 +56,31 @@ class MainActivityPresenter (private val _view: MainActivityView) {
                         leftOperand = transformStringToInterval(_view.intervalB)
                         ClearNumber.of(_view.substractNumberInput)
                     }
+                    DivideIntervalsOperation::class.java -> {
+                        val right = transformStringToInterval(_view.intervalB)
+                        if (right.leftBound == 0.0 || right.rightBound == 0.0) {
+                            _view.showErrorMessage("Interval B has zero. Dividing is not allowed.")
+                            return
+                        }
+                        right
+                    }
+                    HypothesisIntervalsOperation::class.java -> {
+                        val right = transformStringToInterval(_view.intervalB)
+                        if (right.leftBound == 0.0 || right.rightBound == 0.0
+                                || leftOperand.leftBound == 0.0 || leftOperand.rightBound == 0.0) {
+                            _view.showErrorMessage(
+                                    "Interval A or B has zero. Dividing is not allowed.")
+                            return
+                        }
+                        right
+                    }
                     else -> transformStringToInterval(_view.intervalB)
                 }
 
                 _result = _binaryOperation?.execute(leftOperand, rightOperand)
+                _view.enableResultButtons()
             }
+
             OperationType.UNARY_OPERATION -> {
                 if (!areIntervalsProperlyFilled()) {
                     _view.showErrorMessage("Fill intervals in form 0;0")
@@ -82,9 +102,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
                 }
 
                 _result = _unaryOperation?.execute(operand)
-            }
-            OperationType.MULTIPLE_OPERATION -> {
-
+                _view.enableResultButtons()
             }
             null -> { /*empty*/ }
         }
@@ -94,7 +112,9 @@ class MainActivityPresenter (private val _view: MainActivityView) {
         val result = _result
         if (result != null) {
             _view.intervalA = transformIntervalToString(result)
+
             _result = null
+            _view.disableResultButtons()
         }
     }
 
@@ -102,8 +122,33 @@ class MainActivityPresenter (private val _view: MainActivityView) {
         val result = _result
         if (result != null) {
             _view.intervalB = transformIntervalToString(result)
+
             _result = null
+            _view.disableResultButtons()
         }
+    }
+
+    public fun transformDoubleArrayToResult(array: DoubleArray) {
+        setMultipleOperation(MultipleIntervalMultiplyOperation())
+
+        val arr = transformDoubleArrayToIntervals(array)
+        _result = _multipleOperation?.execute(arr)
+        _view.enableResultButtons()
+    }
+
+    private fun transformDoubleArrayToIntervals(array: DoubleArray): Array<Interval> {
+        val intervalArray = arrayListOf<Interval>()
+
+        array.forEachIndexed { index, _ ->
+            if (index % 2 == 0) {
+                intervalArray.add(ConfidenceInterval.of(
+                        leftBound = array[index],
+                        rightBound = array[index + 1]
+                ))
+            }
+        }
+
+        return intervalArray.toTypedArray()
     }
 
 
