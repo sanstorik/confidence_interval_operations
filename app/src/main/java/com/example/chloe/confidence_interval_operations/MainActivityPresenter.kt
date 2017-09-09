@@ -9,7 +9,6 @@ import com.example.chloe.confidence_interval_operations.confidence_operations.op
 class MainActivityPresenter (private val _view: MainActivityView) {
     private var _binaryOperation: BinaryIntervalOperation? = null
     private var _unaryOperation: UnaryIntervalOperation? = null
-    private var _multipleOperation: MultipleIntervalOperation? = null
     private var _currentOperation: OperationType? = null
 
     private var _result: Interval? = null
@@ -22,11 +21,6 @@ class MainActivityPresenter (private val _view: MainActivityView) {
     public fun setUnaryOperation(operation: UnaryIntervalOperation) {
         _unaryOperation = operation
         _currentOperation = OperationType.UNARY_OPERATION
-    }
-
-    public fun setMultipleOperation(operation: MultipleIntervalOperation) {
-        _multipleOperation = operation
-        _currentOperation = OperationType.MULTIPLE_OPERATION
     }
 
     public fun executeOnClick() {
@@ -84,7 +78,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
             OperationType.UNARY_OPERATION -> {
                 if (!areIntervalsProperlyFilled()) {
                     _view.showErrorMessage("Fill intervals in form 0;0")
-                    return;
+                    return
                 }
 
                 val operand = when (_unaryOperation!!::class.java) {
@@ -104,7 +98,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
                 _result = _unaryOperation?.execute(operand)
                 _view.enableResultButtons()
             }
-            null -> { /*empty*/ }
+            else -> { /*empty*/ }
         }
     }
 
@@ -129,11 +123,11 @@ class MainActivityPresenter (private val _view: MainActivityView) {
     }
 
     public fun transformDoubleArrayToResult(array: DoubleArray) {
-        setMultipleOperation(MultipleIntervalMultiplyOperation())
-
         val arr = transformDoubleArrayToIntervals(array)
-        _result = _multipleOperation?.execute(arr)
-        _view.enableResultButtons()
+        if (arr.size >= 2) {
+            _result = MultipleIntervalMultiplyOperation().execute(arr)
+            _view.enableResultButtons()
+        }
     }
 
     private fun transformDoubleArrayToIntervals(array: DoubleArray): Array<Interval> {
