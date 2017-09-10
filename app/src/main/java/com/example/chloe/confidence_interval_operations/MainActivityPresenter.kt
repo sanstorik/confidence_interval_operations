@@ -34,21 +34,35 @@ class MainActivityPresenter (private val _view: MainActivityView) {
                 var leftOperand = transformStringToInterval(_view.intervalA)
                 val rightOperand = when (_binaryOperation!!::class.java) {
                     MultiplyOnClearNumberOperation::class.java -> {
-                        ClearNumber.of(_view.multiplyNumberInput)
+                        if (_view.multiplyNumberInput == null) {
+                            _view.showErrorMessage("Multiply input is empty.")
+                            return;
+                        }
+                        ClearNumber.of(_view.multiplyNumberInput!!)
                     }
                     DivideOnClearNumberOperation::class.java -> {
-                        if (_view.divideNumberInput == 0.0) {
-                            _view.showErrorMessage("Number is zero")
+                        if (_view.divideNumberInput == null || _view.divideNumberInput == 0.0) {
+                            _view.showErrorMessage("Divide number is zero or empty")
+                            return
                         }
                         leftOperand = transformStringToInterval(_view.intervalB)
-                        ClearNumber.of(_view.divideNumberInput)
+                        ClearNumber.of(_view.divideNumberInput!!)
                     }
                     AddingClearNumberToIntervalOperation::class.java -> {
-                        ClearNumber.of(_view.addNumberInput)
+                        if (_view.addNumberInput == null) {
+                            _view.showErrorMessage("Add input is empty.")
+                            return;
+                        }
+                        ClearNumber.of(_view.addNumberInput!!)
                     }
                     SubstractClearNumberFromIntervalOperation::class.java -> {
+                        if (_view.substractNumberInput == null) {
+                            _view.showErrorMessage("Substract number input is empty.")
+                            return;
+                        }
+
                         leftOperand = transformStringToInterval(_view.intervalB)
-                        ClearNumber.of(_view.substractNumberInput)
+                        ClearNumber.of(_view.substractNumberInput!!)
                     }
                     DivideIntervalsOperation::class.java -> {
                         val right = transformStringToInterval(_view.intervalB)

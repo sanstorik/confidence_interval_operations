@@ -28,14 +28,14 @@ class MainActivity : Activity(), MainActivityView {
             intervalB_et.setText(value)
         }
 
-    override val divideNumberInput: Double
-        get() = divideNumber_et.text.toString().toDouble()
-    override val multiplyNumberInput: Double
-        get() = multiplyNumber_et.text.toString().toDouble()
-    override val addNumberInput: Double
-        get() = addNumber_et.text.toString().toDouble()
-    override val substractNumberInput: Double
-        get() = substractNumber_et.text.toString().toDouble()
+    override val divideNumberInput: Double?
+        get() = divideNumber_et.text.toString().toDoubleOrNull()
+    override val multiplyNumberInput: Double?
+        get() = multiplyNumber_et.text.toString().toDoubleOrNull()
+    override val addNumberInput: Double?
+        get() = addNumber_et.text.toString().toDoubleOrNull()
+    override val substractNumberInput: Double?
+        get() = substractNumber_et.text.toString().toDoubleOrNull()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,10 +144,10 @@ interface MainActivityView {
     var intervalA: String
     var intervalB: String
 
-    val divideNumberInput: Double
-    val multiplyNumberInput: Double
-    val addNumberInput: Double
-    val substractNumberInput: Double
+    val divideNumberInput: Double?
+    val multiplyNumberInput: Double?
+    val addNumberInput: Double?
+    val substractNumberInput: Double?
 
     fun showErrorMessage(msg: String)
 
