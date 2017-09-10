@@ -1,12 +1,13 @@
 package com.example.chloe.confidence_interval_operations.confidence_operations.operations
 
 import com.example.chloe.confidence_interval_operations.confidence_operations.Interval
+import com.example.chloe.confidence_interval_operations.confidence_operations.OperationInfo
 
 /**
  * Abstraction for all operations with
  * two intervals, for example multiply, adding.
  */
-interface BinaryIntervalOperation {
+interface BinaryIntervalOperation: OperationInfo {
     /**
      * Executes operation between two intervals
      * @param first first operand

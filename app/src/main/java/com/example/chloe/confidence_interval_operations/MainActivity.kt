@@ -10,6 +10,7 @@ import android.view.View
 import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.operations.*
 import com.example.chloe.confidence_interval_operations.interval_array_input.ConfidenceArrayListActivity
+import com.example.chloe.confidence_interval_operations.interval_graph.IntervalGraphActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -28,6 +29,12 @@ class MainActivity : Activity(), MainActivityView {
             intervalB_et.setText(value)
         }
 
+    override var isGraphButtonEnabled: Boolean
+        get() = graph_btn.isEnabled
+        set(value) {
+              graph_btn.isEnabled = value
+        }
+
     override val divideNumberInput: Double?
         get() = divideNumber_et.text.toString().toDoubleOrNull()
     override val multiplyNumberInput: Double?
@@ -44,16 +51,24 @@ class MainActivity : Activity(), MainActivityView {
         radGroup1.setToggleListener { onToggleClicked(it) }
 
         exec_btn.setOnClickListener { _presenter.executeOnClick() }
+        graph_btn.setOnClickListener { _presenter.graphButtonOnClick() }
         res_to_A_btn.setOnClickListener { _presenter.resultToA() }
         res_to_B_btn.setOnClickListener { _presenter.resultToB() }
 
+        radGroup1.onClick(add_rb)
+
         disableResultButtons()
+        isGraphButtonEnabled = false
 
         if (intent.extras != null) {
             val array = intent.extras.getBundle("intervalList").getDoubleArray("intervalValues")
-            Log.i("tag", array.size.toString() + " hui ")
             _presenter.transformDoubleArrayToResult(array)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        radGroup1.onClick(add_rb)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -85,9 +100,25 @@ class MainActivity : Activity(), MainActivityView {
         res_to_B_btn.isEnabled = false
     }
 
+    override fun openGraphActivity(intervalValues: DoubleArray, fullInfo: String,
+                                   isOperationUnary: Boolean) {
+        val intent = Intent(this, IntervalGraphActivity::class.java)
+        val bundle = Bundle()
+
+        bundle.putDoubleArray("intervalValues", intervalValues)
+        bundle.putString("operationFullInfo", fullInfo)
+        bundle.putBoolean("isOperationUnary", isOperationUnary)
+
+        intent.putExtra("intervalBundle", bundle)
+
+
+        startActivity(intent)
+    }
+
 
     private fun openIntervalListInputActivity() =
             startActivity(Intent(this, ConfidenceArrayListActivity::class.java))
+
 
     private fun onToggleClicked(id: Int) {
         disableInput()
@@ -140,6 +171,7 @@ class MainActivity : Activity(), MainActivityView {
     }
 }
 
+
 interface MainActivityView {
     var intervalA: String
     var intervalB: String
@@ -153,6 +185,11 @@ interface MainActivityView {
 
     fun enableResultButtons()
     fun disableResultButtons()
+
+    var isGraphButtonEnabled: Boolean
+
+    fun openGraphActivity(intervalValues: DoubleArray, fullInfo: String,
+                          isOperationUnary: Boolean)
 }
 
 

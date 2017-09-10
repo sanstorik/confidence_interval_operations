@@ -10,6 +10,8 @@ public enum class OperationType {
 
 open class AddingIntervalsOperation: BinaryIntervalOperation {
 
+    override val operationFullInfo = "Adding interval A to interval B"
+
     override fun execute(first: Interval, second: Interval) =
              ConfidenceInterval.of(
                      first.leftBound + second.leftBound,
@@ -18,10 +20,15 @@ open class AddingIntervalsOperation: BinaryIntervalOperation {
 }
 
 
-class AddingClearNumberToIntervalOperation: AddingIntervalsOperation()
+class AddingClearNumberToIntervalOperation: AddingIntervalsOperation() {
+    override val operationFullInfo = "Adding clear number to interval"
+}
 
 
 open class SubstractInvervalsOperations: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Substracting interval A from interal B"
+
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
                     first.leftBound - second.rightBound,
@@ -29,10 +36,15 @@ open class SubstractInvervalsOperations: BinaryIntervalOperation {
 }
 
 
-class SubstractClearNumberFromIntervalOperation: SubstractInvervalsOperations()
+class SubstractClearNumberFromIntervalOperation: SubstractInvervalsOperations() {
+    override val operationFullInfo = "Substracting clear number from interval"
+}
 
 
 class ReverseIntervalOperation: UnaryIntervalOperation {
+
+    override val operationFullInfo = "Reflecting interval A"
+
     override fun execute(interval: Interval) =
             ConfidenceInterval.of(
                     -interval.rightBound,
@@ -41,6 +53,9 @@ class ReverseIntervalOperation: UnaryIntervalOperation {
 
 
 class MultiplyIntervalsOperation: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Multiplying interval A on interval B"
+
     override fun execute(first: Interval, second: Interval): Interval {
         val leftBound = getMultiplySequence(first, second).min()!!
         val rightBound = getMultiplySequence(first, second).max()!!
@@ -60,6 +75,9 @@ class MultiplyIntervalsOperation: BinaryIntervalOperation {
 
 
 class DivideIntervalsOperation: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Dividing interval A on interval B"
+
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
                     first.leftBound / second.rightBound,
@@ -68,6 +86,9 @@ class DivideIntervalsOperation: BinaryIntervalOperation {
 
 
 class HypothesisIntervalsOperation: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Finding hypothesis of interval A and interval B"
+
     override fun execute(first: Interval, second: Interval): Interval {
         val leftBound = getDivideSequence(first, second).min()!!
         val rightBound = getDivideSequence(first, second).max()!!
@@ -86,6 +107,9 @@ class HypothesisIntervalsOperation: BinaryIntervalOperation {
 }
 
 class InversionIntervalOperation: UnaryIntervalOperation {
+
+    override val operationFullInfo = "Inverting interval A"
+
     override fun execute(interval: Interval) =
             ConfidenceInterval.of(
                     1 / interval.rightBound,
@@ -94,6 +118,9 @@ class InversionIntervalOperation: UnaryIntervalOperation {
 
 
 class MultiplyOnClearNumberOperation: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Multiplying clear number on Interval"
+
     override fun execute(first: Interval, second: Interval): Interval {
         if (second::class.java != ClearNumber::class.java
                 && first::class.java != ClearNumber::class.java) {
@@ -108,6 +135,9 @@ class MultiplyOnClearNumberOperation: BinaryIntervalOperation {
 
 
 class DivideOnClearNumberOperation: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Dividing interval on clear number"
+
     override fun execute(first: Interval, second: Interval): Interval {
         if (second::class.java != ClearNumber::class.java
                 && first::class.java != ClearNumber::class.java) {
@@ -122,6 +152,9 @@ class DivideOnClearNumberOperation: BinaryIntervalOperation {
 
 
 class FindMaxIntervalOperation: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Finding max interval between intervals A and B"
+
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
                     (first.leftBound.toInt() or first.leftBound.toInt()).toDouble(),
@@ -130,6 +163,9 @@ class FindMaxIntervalOperation: BinaryIntervalOperation {
 
 
 class FindMinIntervalOperation: BinaryIntervalOperation {
+
+    override val operationFullInfo = "Finding max interval between intervals A and B\""
+
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
                     (first.leftBound.toInt() and first.leftBound.toInt()).toDouble(),
@@ -138,6 +174,9 @@ class FindMinIntervalOperation: BinaryIntervalOperation {
 
 
 class MultipleIntervalMultiplyOperation: MultipleIntervalOperation {
+
+    override val operationFullInfo = "Multiplying multiple instances of intervals"
+
     override fun execute(intervals: Array<Interval>): Interval {
         if (intervals.size < 2) {
             throw IllegalArgumentException("size of array must be above 2")

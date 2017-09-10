@@ -4,6 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chloe.confidence_interval_operations.interval_graph.interval_graph_activity">
+    android:background="@drawable/bg2"
+    tools:context="com.example.chloe.confidence_interval_operations.interval_graph.IntervalGraphActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:navigationIcon="?attr/actionModeCloseDrawable"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Input"  />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/my_toolbar">
+
+        <LinearLayout
+            android:layout_width="295dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <com.example.chloe.confidence_interval_operations.interval_graph.GraphView
+                android:id="@+id/a_interval_graph"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="3dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/border" />
+
+            <com.example.chloe.confidence_interval_operations.interval_graph.GraphView
+                android:id="@+id/b_interval_graph"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="3dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/border" />
+        </LinearLayout>
+
+        <com.example.chloe.confidence_interval_operations.interval_graph.GraphView
+            android:id="@+id/result_interval_graph"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="3dp"
+            android:background="@drawable/border" />
+
+    </LinearLayout>
 
 </RelativeLayout>

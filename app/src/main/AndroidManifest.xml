@@ -12,7 +12,6 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,8 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".interval_array_input.ConfidenceArrayListActivity" />
-        <activity android:name=".interval_graph.interval_graph_activity"
-            />
+        <activity android:name=".interval_graph.IntervalGraphActivity" />
     </application>
 
 </manifest>

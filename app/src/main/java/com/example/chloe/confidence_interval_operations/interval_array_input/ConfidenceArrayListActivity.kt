@@ -31,6 +31,11 @@ class ConfidenceArrayListActivity : AppCompatActivity() {
             bundle.putDoubleArray("intervalValues", getArrayFromListView())
             backToMainActivity(bundle)
         }
+
+        setSupportActionBar(my_toolbar)
+
+        my_toolbar.setNavigationOnClickListener { onBackPressed() }
+        my_toolbar.title = "Input array of intervals"
     }
 
     private fun populateListView() {

@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.chloe.confidence_interval_operations.confidence_operations.ClearNumber
 import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.Interval
+import com.example.chloe.confidence_interval_operations.confidence_operations.OperationInfo
 import com.example.chloe.confidence_interval_operations.confidence_operations.operations.*
 
 class MainActivityPresenter (private val _view: MainActivityView) {
@@ -12,6 +13,12 @@ class MainActivityPresenter (private val _view: MainActivityView) {
     private var _currentOperation: OperationType? = null
 
     private var _result: Interval? = null
+
+    private lateinit var _lastLeftOperand: Interval
+    private lateinit var _lastRightOperand: Interval
+    private lateinit var _lastResult: Interval
+    private lateinit var _lastOperationInfo: OperationInfo
+    private lateinit var _lastOperationType: OperationType
 
     public fun setBinaryOperation(operation: BinaryIntervalOperation) {
         _binaryOperation = operation
@@ -87,6 +94,15 @@ class MainActivityPresenter (private val _view: MainActivityView) {
 
                 _result = _binaryOperation?.execute(leftOperand, rightOperand)
                 _view.enableResultButtons()
+
+
+                _lastLeftOperand = leftOperand
+                _lastRightOperand = rightOperand
+                _lastResult = _result!!
+                _lastOperationInfo = _binaryOperation!!
+                _lastOperationType = OperationType.BINARY_OPERATION
+
+                _view.isGraphButtonEnabled = true
             }
 
             OperationType.UNARY_OPERATION -> {
@@ -111,6 +127,14 @@ class MainActivityPresenter (private val _view: MainActivityView) {
 
                 _result = _unaryOperation?.execute(operand)
                 _view.enableResultButtons()
+
+                _lastLeftOperand = operand
+                _lastRightOperand = operand
+                _lastResult = _result!!
+                _lastOperationInfo = _unaryOperation!!
+                _lastOperationType = OperationType.UNARY_OPERATION
+
+                _view.isGraphButtonEnabled = true
             }
             else -> { /*empty*/ }
         }
@@ -134,6 +158,17 @@ class MainActivityPresenter (private val _view: MainActivityView) {
             _result = null
             _view.disableResultButtons()
         }
+    }
+
+    public fun graphButtonOnClick() {
+        _view.openGraphActivity( intervalValues = doubleArrayOf(
+                _lastLeftOperand.leftBound, _lastLeftOperand.rightBound,
+                _lastRightOperand.leftBound, _lastRightOperand.rightBound,
+                _lastResult.leftBound, _lastResult.rightBound
+        ),
+                fullInfo = _lastOperationInfo.operationFullInfo,
+                isOperationUnary = _lastOperationType == OperationType.UNARY_OPERATION
+        )
     }
 
     public fun transformDoubleArrayToResult(array: DoubleArray) {
