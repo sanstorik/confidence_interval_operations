@@ -61,8 +61,10 @@ class MainActivity : Activity(), MainActivityView {
         isGraphButtonEnabled = false
 
         if (intent.extras != null) {
-            val array = intent.extras.getBundle("intervalList").getDoubleArray("intervalValues")
-            _presenter.transformDoubleArrayToResult(array)
+            if (intent.extras.getBundle("intervalList") != null) {
+                val array = intent.extras.getBundle("intervalList").getDoubleArray("intervalValues")
+                _presenter.transformDoubleArrayToResult(array)
+            }
         }
     }
 

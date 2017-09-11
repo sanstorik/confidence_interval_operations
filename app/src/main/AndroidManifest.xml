@@ -11,16 +11,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="sensorLandscape">
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".interval_array_input.ConfidenceArrayListActivity" />
-        <activity android:name=".interval_graph.IntervalGraphActivity" />
+        <activity android:name=".interval_array_input.ConfidenceArrayListActivity"
+                  android:windowSoftInputMode="adjustPan"
+                  android:configChanges="orientation|screenSize"/>
+        <activity android:name=".interval_graph.IntervalGraphActivity"/>
     </application>
 
 </manifest>
