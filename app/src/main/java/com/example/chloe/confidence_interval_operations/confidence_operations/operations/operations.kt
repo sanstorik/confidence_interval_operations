@@ -164,7 +164,7 @@ class FindMaxIntervalOperation: BinaryIntervalOperation {
 
 class FindMinIntervalOperation: BinaryIntervalOperation {
 
-    override val operationFullInfo = "Finding max interval between intervals A and B\""
+    override val operationFullInfo = "Finding min interval between intervals A and B"
 
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
