@@ -19,20 +19,16 @@ class GraphView @JvmOverloads constructor(
     : View(context, set, value) {
 
     private enum class Corners {
-        BOTTOM_LEFT {
-            override val cornerIndex = 0
-        },
-        TOP_LEFT {
-            override val cornerIndex = 1
-        },
-        TOP_RIGHT {
-            override val cornerIndex = 2
-        },
-        BOTTOM_RIGHT {
-            override val cornerIndex = 3
-        };
+        BOTTOM_LEFT(0),
+        TOP_LEFT(1),
+        TOP_RIGHT(2),
+        BOTTOM_RIGHT(3);
 
-        abstract val cornerIndex: Int
+        var cornerIndex = 0
+
+        constructor(cornerIndex: Int) {
+            this.cornerIndex = cornerIndex
+        }
     }
 
     private val corners: Array<Point?> by lazy { arrayOfNulls<Point>(4) }
