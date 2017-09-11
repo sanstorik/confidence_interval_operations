@@ -40,7 +40,7 @@ class ConfidenceArrayListActivity : AppCompatActivity() {
 
     private fun populateListView() {
         for (i in 0 until 10) {
-            adapter.add(ConfidenceInterval.of(0,0))
+            adapter.add(null)
         }
 
         intervalArray_lv.adapter = adapter
