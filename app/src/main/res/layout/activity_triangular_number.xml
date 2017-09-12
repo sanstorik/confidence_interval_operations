@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_triangular_number"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:background="@drawable/bg2">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainLinear_layout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36sp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:layout_marginStart="150dp"
+                android:layout_marginLeft="150dp"
+                android:id="@+id/leftBound_tv"
+                android:text="X̱" />
+
+            <TextView
+                android:text="X̂"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mid_tv"
+                android:textSize="36sp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/leftBound_tv"
+                android:layout_toEndOf="@+id/leftBound_tv"
+                android:layout_marginLeft="55dp"
+                android:layout_marginStart="44dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rightBound_tv"
+                android:layout_weight="1"
+                android:textSize="36sp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/mid_tv"
+                android:layout_toEndOf="@+id/mid_tv"
+                android:layout_marginLeft="44dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="X̄" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Triangular A"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_weight="1.2"
+                android:textSize="20sp"
+                android:lines="2"
+                android:textColor="@android:color/background_dark"
+                android:typeface="serif"
+                android:textAlignment="center" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:layout_weight="1.5"
+                android:hint="0"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:background="@drawable/border"
+                android:textSize="25sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editText3"
+                android:layout_weight="1.5"
+                android:hint="0"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:background="@drawable/border"
+                android:textSize="25sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/inputRightBoundA_et"
+                android:hint="0"
+                android:layout_weight="1.5"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:background="@drawable/border"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Triangular B"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:textSize="20sp"
+                android:lines="2"
+                android:textColor="@android:color/background_dark"
+                android:typeface="serif"
+                android:textAlignment="center" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:layout_weight="1.5"
+                android:hint="0"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:background="@drawable/border"
+                android:textSize="25sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editText3"
+                android:layout_weight="1.5"
+                android:hint="0"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:background="@drawable/border"
+                android:textSize="25sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editText4"
+                android:hint="0"
+                android:layout_weight="1.5"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:background="@drawable/border"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2">
+
+            <Button
+                android:text="FIND SUm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/findSum_btn"
+                android:layout_weight="1"
+                android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginRight="60dp"
+                android:textSize="20sp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+            <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+                android:background="@drawable/border_soft">
+
+            <TextView
+                android:text="Triangular C"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:textSize="20sp"
+                android:lines="2"
+                android:textColor="@android:color/background_dark"
+                android:typeface="serif"
+                android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/editText"
+                    android:layout_weight="1.5"
+                    android:hint="0"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="25sp"
+                    android:enabled="false" />
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/editText3"
+                android:layout_weight="1.5"
+                android:hint="0"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/editText4"
+                android:hint="0"
+                android:layout_weight="1.5"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:textSize="25sp" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:text="Input X value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editText4"
+                android:hint="0"
+                android:layout_weight="1.5"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:text="Value mA(x)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/affilationValA_tv"
+                    android:layout_weight="1.2"
+                    android:textSize="20sp"
+                    android:lines="1"
+                    android:textColor="@android:color/background_dark"
+                    android:typeface="serif"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/affilationValA_et"
+                    android:layout_weight="1.2"
+                    android:textSize="20sp"
+                    android:lines="1"
+                    android:textColor="@android:color/background_dark"
+                    android:typeface="serif"
+                    android:textAlignment="center"
+                    android:text="243252" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Value mB(x)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/affilationValB_tv"
+                    android:layout_weight="1.2"
+                    android:textSize="20sp"
+                    android:lines="1"
+                    android:textColor="@android:color/background_dark"
+                    android:typeface="serif"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/affilationValB_et"
+                    android:layout_weight="1.2"
+                    android:textSize="20sp"
+                    android:lines="1"
+                    android:textColor="@android:color/background_dark"
+                    android:typeface="serif"
+                    android:textAlignment="center"
+                    android:text="243252" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Value mC(x)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:textSize="20sp"
+                    android:lines="1"
+                    android:textColor="@android:color/background_dark"
+                    android:typeface="serif"
+                    android:textAlignment="center"
+                    android:id="@+id/affilationValC_tv" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/affilationValC_et"
+                    android:layout_weight="1.2"
+                    android:textSize="20sp"
+                    android:lines="1"
+                    android:textColor="@android:color/background_dark"
+                    android:typeface="serif"
+                    android:textAlignment="center"
+                    android:text="243252" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp">
+
+                <RadioGroup
+                    android:id="@+id/showType_rb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radiobutton_layout"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="Triangular A"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radiobutton_text"
+                        android:textSize="13sp"/>
+
+                    <RadioButton
+                        android:id="@+id/radioB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radiobutton_layout"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="Triangular B"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/radiobutton_text"
+                        android:textSize="13sp"/>
+
+                    <RadioButton
+                        android:id="@+id/radioC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radiobutton_layout"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="Triangular C"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@drawable/radiobutton_text"
+                        android:textSize="13sp"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2">
+
+            <TextView
+                android:text="412352345324523hnr45iw4hrihwesrfewsfhewsrfgdrngjhrdgnjtgjtdfghnderghrtjghntfgnh"
+                android:layout_width="match_parent"
+                android:layout_height="107dp"
+                android:id="@+id/resultM_tv"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

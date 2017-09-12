@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2"
+    tools:context="com.example.chloe.confidence_interval_operations.MainActivity">
+
+    <TextView
+        android:id="@+id/intervalB_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="18dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Interval A"
+        android:textSize="25sp"
+        tools:text="Interval A" />
+
+    <TextView
+        android:id="@+id/intervalA_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/intervalB_tv"
+        android:layout_alignBottom="@+id/intervalB_tv"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:layout_toEndOf="@+id/intervalB_tv"
+        android:layout_toRightOf="@+id/intervalB_tv"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Interval B"
+        android:textSize="25sp"
+        tools:text="Interval B" />
+
+    <EditText
+        android:id="@+id/intervalA_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/intervalB_tv"
+        android:layout_alignStart="@+id/intervalB_tv"
+        android:layout_below="@+id/intervalA_tv"
+        android:layout_marginEnd="30dp"
+        android:layout_toLeftOf="@+id/intervalB_et"
+        android:layout_toStartOf="@+id/intervalB_et"
+        android:ems="10"
+        android:hint="0;0"
+        android:inputType="text"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/intervalB_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/intervalA_tv"
+        android:layout_alignStart="@+id/intervalA_tv"
+        android:layout_below="@+id/intervalB_tv"
+        android:layout_marginEnd="10dp"
+        android:layout_toLeftOf="@+id/exec_btn"
+        android:layout_toStartOf="@+id/exec_btn"
+        android:ems="10"
+        android:hint="0;0"
+        android:inputType="text"
+        android:textSize="25sp" />
+
+    <com.example.chloe.confidence_interval_operations.ToggleButtonGroupTableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/intervalA_et"
+        android:layout_alignStart="@+id/intervalA_et"
+        android:layout_below="@+id/intervalA_et">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/add_rb"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Додавання"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/add_A_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="Додавання до А"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/addNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-15dp"
+                android:width="50dp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="0"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/max_rb"
+                android:layout_height="wrap_content"
+                android:text="Максимум"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/substr_rb"
+                android:layout_height="wrap_content"
+                android:text="Віднімання"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/substr_B_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="Віднімання від B"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/substractNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-15dp"
+                android:width="50dp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="0"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/min_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:text="Мінімум"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/mul_rb"
+                android:layout_height="wrap_content"
+                android:text="Множення"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/mul_A_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="Множення А на число"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/multiplyNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:width="50dp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="0"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/reverse_A_rb"
+                android:layout_height="wrap_content"
+                android:text="Відображення А"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/divide_rb"
+                android:layout_height="wrap_content"
+                android:text="Ділення"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/divide_B_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="Ділення B на число"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/divideNumber_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-5dp"
+                android:width="50dp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="0"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/inverse_B_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:text="Інверсія B"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <RadioButton
+                android:id="@+id/div_thesis_rb"
+                android:layout_height="wrap_content"
+                android:text="Гіпотеза"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/mul_many_rb"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="Множення декількох"
+                android:textSize="13sp" />
+
+        </TableRow>
+
+    </com.example.chloe.confidence_interval_operations.ToggleButtonGroupTableLayout>
+
+    <Button
+        android:id="@+id/exec_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/intervalB_et"
+        android:layout_alignEnd="@+id/res_to_A_btn"
+        android:layout_alignLeft="@+id/res_to_A_btn"
+        android:layout_alignRight="@+id/res_to_A_btn"
+        android:layout_alignStart="@+id/res_to_A_btn"
+        android:text="Execute" />
+
+    <Button
+        android:id="@+id/graph_btn"
+        android:layout_width="wrap_content"
+        android:textColor="@color/text_color"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/intervalB_et"
+        android:layout_alignEnd="@+id/res_to_B_btn"
+        android:layout_alignLeft="@+id/res_to_B_btn"
+        android:layout_alignRight="@+id/res_to_B_btn"
+        android:layout_alignStart="@+id/res_to_B_btn"
+        android:text="Graph" />
+
+    <Button
+        android:id="@+id/res_to_B_btn"
+        android:textColor="@color/text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/graph_btn"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="Result to B" />
+
+    <Button
+        android:id="@+id/res_to_A_btn"
+        android:textColor="@color/text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exec_btn"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/res_to_B_btn"
+        android:layout_toStartOf="@+id/res_to_B_btn"
+        android:text="Result to A" />
+
+</RelativeLayout>

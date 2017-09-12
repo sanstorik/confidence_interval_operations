@@ -174,7 +174,7 @@ class MainActivity : Activity(), MainActivityView {
 }
 
 
-interface MainActivityView {
+internal interface MainActivityView {
     var intervalA: String
     var intervalB: String
 

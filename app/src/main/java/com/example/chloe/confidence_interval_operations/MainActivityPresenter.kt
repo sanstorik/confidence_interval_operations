@@ -7,7 +7,7 @@ import com.example.chloe.confidence_interval_operations.confidence_operations.In
 import com.example.chloe.confidence_interval_operations.confidence_operations.OperationInfo
 import com.example.chloe.confidence_interval_operations.confidence_operations.operations.*
 
-class MainActivityPresenter (private val _view: MainActivityView) {
+internal class MainActivityPresenter (private val _view: MainActivityView) {
     private var _binaryOperation: BinaryIntervalOperation? = null
     private var _unaryOperation: UnaryIntervalOperation? = null
     private var _currentOperation: OperationType? = null
@@ -20,17 +20,17 @@ class MainActivityPresenter (private val _view: MainActivityView) {
     private lateinit var _lastOperationInfo: OperationInfo
     private lateinit var _lastOperationType: OperationType
 
-    public fun setBinaryOperation(operation: BinaryIntervalOperation) {
+    fun setBinaryOperation(operation: BinaryIntervalOperation) {
         _binaryOperation = operation
         _currentOperation = OperationType.BINARY_OPERATION
     }
 
-    public fun setUnaryOperation(operation: UnaryIntervalOperation) {
+    fun setUnaryOperation(operation: UnaryIntervalOperation) {
         _unaryOperation = operation
         _currentOperation = OperationType.UNARY_OPERATION
     }
 
-    public fun executeOnClick() {
+    fun executeOnClick() {
         when(_currentOperation) {
             OperationType.BINARY_OPERATION -> {
                 if (!areIntervalsProperlyFilled()) {
@@ -43,7 +43,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
                     MultiplyOnClearNumberOperation::class.java -> {
                         if (_view.multiplyNumberInput == null) {
                             _view.showErrorMessage("Multiply input is empty.")
-                            return;
+                            return
                         }
                         ClearNumber.of(_view.multiplyNumberInput!!)
                     }
@@ -58,14 +58,14 @@ class MainActivityPresenter (private val _view: MainActivityView) {
                     AddingClearNumberToIntervalOperation::class.java -> {
                         if (_view.addNumberInput == null) {
                             _view.showErrorMessage("Add input is empty.")
-                            return;
+                            return
                         }
                         ClearNumber.of(_view.addNumberInput!!)
                     }
                     SubstractClearNumberFromIntervalOperation::class.java -> {
                         if (_view.substractNumberInput == null) {
                             _view.showErrorMessage("Substract number input is empty.")
-                            return;
+                            return
                         }
 
                         leftOperand = transformStringToInterval(_view.intervalB)
@@ -140,7 +140,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
         }
     }
 
-    public fun resultToA() {
+    fun resultToA() {
         val result = _result
         if (result != null) {
             _view.intervalA = transformIntervalToString(result)
@@ -149,8 +149,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
             _view.disableResultButtons()
         }
     }
-
-    public fun resultToB() {
+    fun resultToB() {
         val result = _result
         if (result != null) {
             _view.intervalB = transformIntervalToString(result)
@@ -160,7 +159,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
         }
     }
 
-    public fun graphButtonOnClick() {
+    fun graphButtonOnClick() {
         _view.openGraphActivity( intervalValues = doubleArrayOf(
                 _lastLeftOperand.leftBound, _lastLeftOperand.rightBound,
                 _lastRightOperand.leftBound, _lastRightOperand.rightBound,
@@ -171,7 +170,7 @@ class MainActivityPresenter (private val _view: MainActivityView) {
         )
     }
 
-    public fun transformDoubleArrayToResult(array: DoubleArray) {
+    fun transformDoubleArrayToResult(array: DoubleArray) {
         val arr = transformDoubleArrayToIntervals(array)
         if (arr.size >= 2) {
             _result = MultipleIntervalMultiplyOperation().execute(arr)
