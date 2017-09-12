@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-        </activity>
+        </activity>/
         <activity
             android:name=".interval_array_input.ConfidenceArrayListActivity"
             android:configChanges="orientation|screenSize"
@@ -22,6 +22,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".triangular_numbers.triangular_graph.TriangularNumberGraphActivity">
         </activity>
     </application>
 

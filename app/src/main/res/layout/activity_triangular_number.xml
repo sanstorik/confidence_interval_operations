@@ -68,15 +68,17 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Triangular A"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1.2"
-                android:textSize="20sp"
                 android:lines="2"
+                android:text="Triangular A"
+                android:textAlignment="center"
                 android:textColor="@android:color/background_dark"
-                android:typeface="serif"
-                android:textAlignment="center" />
+                android:textSize="20sp"
+                android:typeface="serif" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -128,15 +130,17 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Triangular B"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1.2"
-                android:textSize="20sp"
                 android:lines="2"
+                android:text="Triangular B"
+                android:textAlignment="center"
                 android:textColor="@android:color/background_dark"
-                android:typeface="serif"
-                android:textAlignment="center" />
+                android:textSize="20sp"
+                android:typeface="serif" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -209,26 +213,28 @@
         android:layout_marginTop="20dp"
             android:background="@drawable/border_soft">
 
-        <TextView
-            android:text="Triangular C"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.2"
-            android:textSize="20sp"
-            android:lines="1"
-            android:textColor="@android:color/background_dark"
-            android:typeface="serif"
-            android:textAlignment="center" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1.2"
+                android:lines="1"
+                android:text="Triangular C"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:typeface="serif" />
+
+            <TextView
                 android:id="@+id/numC_left_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1.5"
+                android:ems="10"
                 android:hint="0"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
                 android:textColor="@color/text_color"
                 android:textSize="25sp" />
 
@@ -427,13 +433,14 @@
                         android:layout_weight="1"
                         android:background="@drawable/radiobutton_layout"
                         android:button="@null"
+                        android:enabled="false"
                         android:gravity="center"
                         android:padding="15dp"
                         android:text="Triangular B"
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@drawable/radiobutton_text"
-                        android:textSize="13sp"/>
+                        android:textSize="13sp" />
 
                     <RadioButton
                         android:id="@+id/radioC"
@@ -442,13 +449,14 @@
                         android:layout_weight="1"
                         android:background="@drawable/radiobutton_layout"
                         android:button="@null"
+                        android:enabled="false"
                         android:gravity="center"
                         android:padding="15dp"
                         android:text="Triangular C"
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@drawable/radiobutton_text"
-                        android:textSize="13sp"/>
+                        android:textSize="13sp" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -460,11 +468,11 @@
             android:layout_weight="1.2">
 
             <TextView
-                android:text="412352345324523hnr45iw4hrihwesrfewsfhewsrfgdrngjhrdgnjtgjtdfghnderghrtjghntfgnh"
+                android:id="@+id/resultM_tv"
                 android:layout_width="match_parent"
                 android:layout_height="107dp"
-                android:id="@+id/resultM_tv"
-                android:textSize="20sp" />
+                android:text="412352345324523hnr45iw4hrihwesrfewsfhewsrfgdrngjhrdgnjtgjtdfghnderghrtjghntfgnh"
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -1,9 +1,12 @@
 package com.example.chloe.confidence_interval_operations.triangular_numbers
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.chloe.confidence_interval_operations.R
+import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph.TriangularGraphView
+import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph.TriangularNumberGraphActivity
 import kotlinx.android.synthetic.main.activity_triangular_number.*
 
 class TriangularNumberActivity : AppCompatActivity(), TriangularNumberActivityView {
@@ -44,13 +47,41 @@ class TriangularNumberActivity : AppCompatActivity(), TriangularNumberActivityVi
     override val inputX
         get() = inputX_et.text.toString().toDoubleOrNull()
 
+    override var afflictionA
+        get() = affilationValA_et.text.toString().toDoubleOrNull()
+        set(value) {
+            affilationValA_et.text = value.toString()
+        }
+
+    override var afflictionB
+        get() = affilationValB_et.text.toString().toDoubleOrNull()
+        set(value) {
+            affilationValB_et.text = value.toString()
+        }
+
+    override var afflictionC
+        get() = affilationValC_et.text.toString().toDoubleOrNull()
+        set(value) {
+            affilationValC_et.text = value.toString()
+        }
+
+    override var resultString
+        get() = resultM_tv.text.toString()
+        set(value) {
+                resultM_tv.text = value
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_triangular_number)
 
         findSum_btn.setOnClickListener { _presenter.findSumButtonOnClick() }
-        graph_btn.setOnClickListener { _presenter.graphButtonOnClick() }
+        graph_btn.setOnClickListener { goToGraphActivity() }
         inputX_btn.setOnClickListener { _presenter.inputXButtonOnClick() }
+
+        radioA.setOnClickListener { _presenter.onTriangularNumberAClicked() }
+        radioB.setOnClickListener { _presenter.onTriangularNumberBClicked() }
+        radioC.setOnClickListener { _presenter.onTriangularNumberCClicked() }
     }
 
     override fun showErrorMessage(msg: String) {
@@ -66,12 +97,27 @@ class TriangularNumberActivity : AppCompatActivity(), TriangularNumberActivityVi
         graph_btn.isEnabled = true
         inputX_btn.isEnabled = true
         inputX_et.isEnabled = true
+
+        radioB.isEnabled = true
+        radioC.isEnabled = true
     }
 
     override fun disableResultButtons() {
         graph_btn.isEnabled = false
         inputX_btn.isEnabled = false
         inputX_et.isEnabled = false
+    }
+
+    private fun goToGraphActivity() {
+        val intent = Intent(this, TriangularNumberGraphActivity::class.java)
+
+        val bundle = Bundle()
+        if (_presenter.getLastTransaction() != null) {
+            bundle.putSerializable("transaction", _presenter.getLastTransaction())
+            intent.putExtra("transaction", bundle)
+        }
+
+        startActivity(intent)
     }
 
 }
@@ -90,6 +136,12 @@ internal interface TriangularNumberActivityView {
     var rightBoundC: Double?
 
     val inputX: Double?
+
+    var afflictionA: Double?
+    var afflictionB: Double?
+    var afflictionC: Double?
+
+    var resultString: String
 
     fun showErrorMessage(msg: String)
 

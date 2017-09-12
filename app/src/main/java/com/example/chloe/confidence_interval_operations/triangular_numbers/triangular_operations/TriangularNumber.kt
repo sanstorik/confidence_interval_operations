@@ -1,10 +1,14 @@
 package com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations
 
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
+import java.io.Serializable
+
 class TriangularNumber private constructor(
         val leftBound: Double,
         val mid: Double,
         val rightBound: Double
-){
+): Serializable {
 
     /**
      * Evaluates M(a)
@@ -21,6 +25,14 @@ class TriangularNumber private constructor(
     fun evaluateLeftBranch(a: Double) = a * (mid - leftBound) + leftBound
 
     fun evaluateRightBranch(a: Double) = rightBound - a * (rightBound - mid)
+
+    private fun writeObject(stream: ObjectOutputStream) {
+        stream.defaultWriteObject()
+    }
+
+    private fun readObject(stream: ObjectInputStream) {
+        stream.defaultReadObject()
+    }
 
     companion object {
         @JvmStatic
