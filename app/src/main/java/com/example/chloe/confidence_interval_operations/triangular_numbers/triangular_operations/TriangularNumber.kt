@@ -1,4 +1,4 @@
-package com.example.chloe.confidence_interval_operations.triangular_numbers
+package com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations
 
 class TriangularNumber private constructor(
         val leftBound: Double,
