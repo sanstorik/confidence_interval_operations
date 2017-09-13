@@ -10,20 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-        </activity>/
+        </activity>
         <activity
             android:name=".interval_array_input.ConfidenceArrayListActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".interval_graph.IntervalGraphActivity" />
-        <activity android:name=".triangular_numbers.TriangularNumberActivity">
+        <activity
+            android:name=".triangular_numbers.TriangularNumberActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".triangular_numbers.triangular_graph.TriangularNumberGraphActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".OperationChooserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".triangular_numbers.triangular_graph.TriangularNumberGraphActivity">
         </activity>
     </application>
 

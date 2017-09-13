@@ -60,6 +60,7 @@ class TriangularGraphView @JvmOverloads constructor(
 
         drawAxes()
         drawNumbers()
+        drawLineMarkers()
     }
 
 
@@ -71,6 +72,23 @@ class TriangularGraphView @JvmOverloads constructor(
         _maxValue = numbers.maxBy { it.rightBound }!!.rightBound
     }
 
+    private fun drawLineMarkers() {
+        drawLineMarker(_paintForA, "A", 0)
+        drawLineMarker(_paintForB, "B", 30)
+        drawLineMarker(_paintForC, "C", 60)
+
+        if (_xValue != null) {
+            drawLineMarker(_paintForX, "X", 90)
+        }
+    }
+
+    private fun drawLineMarker(paint: Paint, lineName: String, offsetY: Int) {
+        val startingPoint = Point.of(width - width / 12, (height / 4) + offsetY)
+
+        drawText(lineName, startingPoint, -30, 10)
+        drawLine(startingPoint, Point.of(startingPoint.x + (width - width / 5),
+                startingPoint.y ), paint)
+    }
 
     private fun drawAxes() {
         _leftStartingPointX = Point.of(width / 12, height / 2 + 50)
