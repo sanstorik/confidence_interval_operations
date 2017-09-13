@@ -103,7 +103,7 @@
                 android:ems="10"
                 android:enabled="false"
                 android:hint="0"
-                android:inputType="number"
+                android:inputType="number|numberSigned"
                 android:textAlignment="center"
                 android:textSize="15sp" />
 
@@ -142,7 +142,7 @@
                 android:ems="10"
                 android:enabled="false"
                 android:hint="0"
-                android:inputType="number"
+                android:inputType="number|numberSigned"
                 android:textAlignment="center"
                 android:textSize="15sp" />
 

@@ -41,14 +41,15 @@ internal class MainActivityPresenter (private val _view: MainActivityView) {
                 var leftOperand = transformStringToInterval(_view.intervalA)
                 val rightOperand = when (_binaryOperation!!::class.java) {
                     MultiplyOnClearNumberOperation::class.java -> {
-                        if (_view.multiplyNumberInput == null) {
+                        if (_view.multiplyNumberInput == null
+                              || _view.multiplyNumberInput!! < 0.0) {
                             _view.showErrorMessage("Multiply input is empty.")
                             return
                         }
                         ClearNumber.of(_view.multiplyNumberInput!!)
                     }
                     DivideOnClearNumberOperation::class.java -> {
-                        if (_view.divideNumberInput == null || _view.divideNumberInput == 0.0) {
+                        if (_view.divideNumberInput == null || _view.divideNumberInput!! <= 0.0) {
                             _view.showErrorMessage("Divide number is zero or empty")
                             return
                         }
@@ -73,7 +74,7 @@ internal class MainActivityPresenter (private val _view: MainActivityView) {
                     }
                     DivideIntervalsOperation::class.java -> {
                         val right = transformStringToInterval(_view.intervalB)
-                        if (right.leftBound == 0.0 || right.rightBound == 0.0) {
+                        if (right.leftBound <= 0.0 || right.rightBound <= 0.0) {
                             _view.showErrorMessage("Interval B has zero. Dividing is not allowed.")
                             return
                         }
@@ -81,12 +82,22 @@ internal class MainActivityPresenter (private val _view: MainActivityView) {
                     }
                     HypothesisIntervalsOperation::class.java -> {
                         val right = transformStringToInterval(_view.intervalB)
-                        if (right.leftBound == 0.0 || right.rightBound == 0.0
+                        if (right.leftBound <= 0.0 || right.rightBound <= 0.0
                                 || leftOperand.leftBound == 0.0 || leftOperand.rightBound == 0.0) {
                             _view.showErrorMessage(
                                     "Interval A or B has zero. Dividing is not allowed.")
                             return
                         }
+                        right
+                    }
+                    MultiplyIntervalsOperation::class.java -> {
+                        val right = transformStringToInterval(_view.intervalB)
+                        if (leftOperand.leftBound < 0 || leftOperand.rightBound < 0
+                                || right.leftBound < 0 || right.rightBound < 0) {
+                            _view.showErrorMessage("Intervals must be >= 0")
+                            return
+                        }
+
                         right
                     }
                     else -> transformStringToInterval(_view.intervalB)
@@ -116,6 +127,7 @@ internal class MainActivityPresenter (private val _view: MainActivityView) {
                         val interval = transformStringToInterval(_view.intervalB)
                         if (interval.leftBound == 0.0 || interval.rightBound == 0.0) {
                             _view.showErrorMessage("interval bound should not be zero")
+                            return
                         }
                         transformStringToInterval(_view.intervalB)
                     }
@@ -172,17 +184,24 @@ internal class MainActivityPresenter (private val _view: MainActivityView) {
 
     fun transformDoubleArrayToResult(array: DoubleArray) {
         val arr = transformDoubleArrayToIntervals(array)
-        if (arr.size >= 2) {
+
+        if (arr != null && arr.size >= 2) {
             _result = MultipleIntervalMultiplyOperation().execute(arr)
             _view.enableResultButtons()
+        } else {
+            _view.showErrorMessage("One of intervals was below zero or size < 2")
         }
     }
 
-    private fun transformDoubleArrayToIntervals(array: DoubleArray): Array<Interval> {
+    private fun transformDoubleArrayToIntervals(array: DoubleArray): Array<Interval>? {
         val intervalArray = arrayListOf<Interval>()
 
         array.forEachIndexed { index, _ ->
             if (index % 2 == 0) {
+                if (array[index] < 0 || array[index + 1] < 0){
+                    return null
+                }
+
                 intervalArray.add(ConfidenceInterval.of(
                         leftBound = array[index],
                         rightBound = array[index + 1]

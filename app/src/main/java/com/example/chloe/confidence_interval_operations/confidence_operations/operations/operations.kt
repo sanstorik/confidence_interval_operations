@@ -157,8 +157,8 @@ class FindMaxIntervalOperation: BinaryIntervalOperation {
 
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
-                    (first.leftBound.toInt() or first.leftBound.toInt()).toDouble(),
-                    (first.rightBound.toInt() or first.rightBound.toInt()).toDouble())
+                    (Math.max(first.leftBound, second.leftBound)),
+                    (Math.max(first.rightBound, second.rightBound)))
 }
 
 
@@ -168,8 +168,8 @@ class FindMinIntervalOperation: BinaryIntervalOperation {
 
     override fun execute(first: Interval, second: Interval) =
             ConfidenceInterval.of(
-                    (first.leftBound.toInt() and first.leftBound.toInt()).toDouble(),
-                    (first.rightBound.toInt() and first.rightBound.toInt()).toDouble())
+                    (Math.min(first.leftBound, second.leftBound)),
+                    (Math.min(first.rightBound, second.rightBound)))
 }
 
 

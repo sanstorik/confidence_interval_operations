@@ -176,15 +176,15 @@
                 android:id="@+id/addNumber_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
                 android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
                 android:enabled="false"
                 android:hint="0"
-                android:inputType="number"
+                android:inputType="number|numberSigned"
                 android:textAlignment="center"
-                android:textSize="15sp"
-                android:layout_marginEnd="15dp" />
+                android:textSize="15sp" />
 
         </TableRow>
 
@@ -200,15 +200,15 @@
                 android:id="@+id/substractNumber_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
                 android:layout_marginStart="-15dp"
                 android:width="50dp"
                 android:ems="10"
                 android:enabled="false"
                 android:hint="0"
-                android:inputType="number"
+                android:inputType="number|numberSigned"
                 android:textAlignment="center"
-                android:textSize="15sp"
-                android:layout_marginEnd="15dp" />
+                android:textSize="15sp" />
         </TableRow>
 
         <TableRow>
