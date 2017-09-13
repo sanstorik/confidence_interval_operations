@@ -62,15 +62,6 @@ class MultiplyIntervalsOperation: BinaryIntervalOperation {
 
         return ConfidenceInterval.of(leftBound, rightBound)
     }
-
-    private fun getMultiplySequence(first: Interval, second: Interval): Array<Double> {
-        return arrayOf(
-                first.leftBound * second.leftBound,
-                first.leftBound * second.rightBound,
-                first.rightBound * second.leftBound,
-                first.rightBound * second.rightBound
-        )
-    }
 }
 
 
@@ -182,15 +173,28 @@ class MultipleIntervalMultiplyOperation: MultipleIntervalOperation {
             throw IllegalArgumentException("size of array must be above 2")
         }
 
-        val operation = MultiplyIntervalsOperation()
-        var result = operation.execute(intervals[0], intervals[1])
+        val result = ArrayList<Double>()
 
-        for (i in 2 until intervals.size) {
-            result = operation.execute(result, intervals[i])
+        for (i in 0 until intervals.size) {
+            for (j in i + 1 until intervals.size) {
+                result.addAll(getMultiplySequence(intervals[i], intervals[j]))
+            }
         }
 
-        return result
+        return ConfidenceInterval.of(
+                leftBound = result.min()!!,
+                rightBound = result.max()!!
+        )
     }
+}
+
+private fun getMultiplySequence(first: Interval, second: Interval): Array<Double> {
+    return arrayOf(
+            first.leftBound * second.leftBound,
+            first.leftBound * second.rightBound,
+            first.rightBound * second.leftBound,
+            first.rightBound * second.rightBound
+    )
 }
 
 
