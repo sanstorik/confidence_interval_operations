@@ -12,26 +12,23 @@ class TankerGraphView @JvmOverloads constructor(
         _value: Int  = 0
 ): TriangularGraphView(_context, _set, _value) {
 
-    private lateinit var _number: TriangularNumber
+    private lateinit var _left: TriangularNumber
+    private lateinit var _right: TriangularNumber
 
     override fun onDraw(canvas: Canvas?) {
         _canvas = canvas!!
 
         _minValue = 0.0
-        _maxValue = _number.rightBound
+        _maxValue = _right.rightBound
 
         drawAxes()
 
-        drawTriangularNumber(_number, _paintForA)
-
-        drawTriangularNumber(TriangularNumber.of(
-                leftBound = 0.0,
-                mid = 5.0,
-                rightBound = _maxValue
-        ), _paintForB)
+        drawTriangularNumber(_left, _paintForA)
+        drawTriangularNumber(_right, _paintForB)
     }
 
-    fun setInitValues(number: TriangularNumber) {
-        _number = number
+    fun setInitValues(left: TriangularNumber, right: TriangularNumber) {
+        _left = left
+        _right = right
     }
 }

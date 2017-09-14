@@ -3,6 +3,7 @@ package com.example.chloe.confidence_interval_operations.triangular_numbers.tria
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +15,22 @@ import kotlinx.android.synthetic.main.activity_tanker_graph.*
 class TankerGraphActivity : FragmentActivity() {
 
     private val _adapter by lazy { TankerGraphPagerAdapter(supportFragmentManager) }
+    private lateinit var _numbers: Array<TriangularNumber>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tanker_graph)
 
+        if (intent.extras != null && intent.extras.getBundle("arr") != null) {
+            _numbers = intent.extras.getBundle("arr")
+                    .getSerializable("arr") as Array<TriangularNumber>
+        }
+
         graphViewPager_vp.adapter = _adapter
-        _adapter.add(TriangularNumber.of(-2.0, 10.0, 15.0))
-        _adapter.add(TriangularNumber.of(0.0, 10.0, 15.0))
-        _adapter.add(TriangularNumber.of(2.0, 6.0, 13.0))
-        _adapter.add(TriangularNumber.of(-10.0, 10.0, 15.0))
+
+        for (i in 0 until _numbers.size step 2) {
+            _adapter.add(_numbers[i], _numbers[i + 1])
+        }
     }
 
 
@@ -31,7 +38,7 @@ class TankerGraphActivity : FragmentActivity() {
             fragmentManager: FragmentManager
     ): FragmentStatePagerAdapter(fragmentManager) {
 
-        private val _numbersList = ArrayList<TriangularNumber>()
+        private val _numbersList = ArrayList<Array<TriangularNumber>>()
 
         override fun getCount() = _numbersList.size
 
@@ -39,15 +46,16 @@ class TankerGraphActivity : FragmentActivity() {
             val fragment = TankerGraphFragment()
 
             val bundle = Bundle()
-            bundle.putSerializable("leftOperand", _numbersList[position])
+            bundle.putSerializable("leftOperand", _numbersList[position][0])
+            bundle.putSerializable("rightOperand", _numbersList[position][1])
 
             fragment.arguments = bundle
 
             return fragment
         }
 
-        fun add(number: TriangularNumber) {
-            _numbersList.add(number)
+        fun add(leftNumber: TriangularNumber, rightNumber: TriangularNumber) {
+            _numbersList.add(arrayOf(leftNumber, rightNumber))
             notifyDataSetChanged()
         }
     }
@@ -61,9 +69,10 @@ class TankerGraphActivity : FragmentActivity() {
 
             val bundle = this.arguments
             val leftOperand = bundle.getSerializable("leftOperand") as TriangularNumber
+            val rightOperand = bundle.getSerializable("rightOperand") as TriangularNumber
 
             view?.findViewById<TankerGraphView>(R.id.graph_gv)
-                    ?.setInitValues(leftOperand)
+                    ?.setInitValues(leftOperand, rightOperand)
 
             return view
         }
