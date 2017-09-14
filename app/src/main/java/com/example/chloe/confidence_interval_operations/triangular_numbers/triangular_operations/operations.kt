@@ -9,3 +9,12 @@ class AddingTriangluarNumbersOperation: BinaryTriangularOperation {
                     rightBound = left.rightBound + right.rightBound
             )
 }
+
+class SubstractingTriangularNumbersOperation: BinaryTriangularOperation {
+    override fun execute(left: TriangularNumber, right: TriangularNumber) =
+            TriangularNumber.of(
+                    leftBound = left.leftBound - right.rightBound,
+                    mid = left.mid - right.mid,
+                    rightBound = left.rightBound - right.leftBound
+            )
+}

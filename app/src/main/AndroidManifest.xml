@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".interval_array_input.ConfidenceArrayListActivity"
             android:configChanges="orientation|screenSize"
@@ -19,13 +18,16 @@
         <activity
             android:name=".triangular_numbers.TriangularNumberActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".triangular_numbers.triangular_graph.TriangularNumberGraphActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" />
+        <activity android:name=".OperationChooserActivity" >
         </activity>
-        <activity android:name=".OperationChooserActivity">
+        <activity android:name=".triangular_numbers.TankerFuelActivity">
+        </activity>
+        <activity android:name=".triangular_numbers.triangular_graph.TankerGraphActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

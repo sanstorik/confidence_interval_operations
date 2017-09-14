@@ -7,7 +7,7 @@ import com.example.chloe.confidence_interval_operations.interval_graph.CustomGra
 import com.example.chloe.confidence_interval_operations.interval_graph.Point
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangularNumber
 
-class TriangularGraphView @JvmOverloads constructor(
+open class TriangularGraphView @JvmOverloads constructor(
         context: Context,
         set: AttributeSet? = null,
         value: Int = 0
@@ -19,17 +19,17 @@ class TriangularGraphView @JvmOverloads constructor(
     private lateinit var _leftStartingPointOne: Point
 
     private val _helpPaint = Paint()
-    private val _paintForA = Paint()
-    private val _paintForB = Paint()
-    private val _paintForC = Paint()
+    protected val _paintForA = Paint()
+    protected val _paintForB = Paint()
+    protected val _paintForC = Paint()
     private val _paintForX = Paint()
     private val _zeroPaint = Paint()
 
     private lateinit var _numbers: Array<TriangularNumber>
     private var _xValue: Double? = null
 
-    private var _minValue = 0.0
-    private var _maxValue = 0.0
+    protected var _minValue = 0.0
+    protected var _maxValue = 0.0
 
     init {
         _helpPaint.strokeWidth = 5.toFloat()
@@ -90,7 +90,7 @@ class TriangularGraphView @JvmOverloads constructor(
                 startingPoint.y ), paint)
     }
 
-    private fun drawAxes() {
+    protected fun drawAxes() {
         _leftStartingPointX = Point.of(width / 12, height / 2 + 50)
         _rightStartingPointX = Point.of(width - width / 8, height / 2 + 50)
 
@@ -130,7 +130,7 @@ class TriangularGraphView @JvmOverloads constructor(
     }
 
 
-    private fun drawTriangularNumber(number: TriangularNumber, paint: Paint) {
+    protected fun drawTriangularNumber(number: TriangularNumber, paint: Paint) {
         drawLine(Point.of(valueToPixels(number.leftBound), _leftStartingPointX.y ),
                 Point.of(valueToPixels(number.mid), _leftStartingPointOne.y), paint)
 
@@ -148,9 +148,9 @@ class TriangularGraphView @JvmOverloads constructor(
     }
 
 
-    private fun valueToPixels(value: Double): Int {
+    protected fun valueToPixels(value: Double): Int {
         val xLength = _leftStartingPointX.lengthX(_rightStartingPointX)
-        val pixelsPerValue = xLength / (Math.abs(_minValue) + Math.abs(_maxValue))
+        val pixelsPerValue = xLength /  (Math.abs(_maxValue) + (Math.abs(_minValue)))
 
         return (pixelsPerValue * value).toInt() + (pixelsPerValue * Math.abs(_minValue)).toInt() +
                 _leftStartingPointX.x
