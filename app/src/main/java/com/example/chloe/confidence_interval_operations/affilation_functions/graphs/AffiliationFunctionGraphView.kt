@@ -55,11 +55,15 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         drawLine(_leftPointX, _rightPointX)
 
         _leftStartingPointOne = Point.of(_leftPointX.x, height / 9)
-        drawArrowY(_leftStartingPointOne, "a")
+
         drawArrowX(_rightPointX)
 
         drawLine(Point.of(valueToPixels(_min), _leftPointX.y),
                 Point.of(valueToPixels(_min), _leftStartingPointOne.y))
+
+        drawArrowY(_leftStartingPointOne, "a")
+        drawText(text = "1", point = _leftStartingPointOne,
+                offsetX = 20, offsetY = 20)
 
 
         drawText(text = String.format("%.2f", _min),
@@ -71,6 +75,11 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
                 point = _rightPointX,
                 offsetX = -40,
                 offsetY = 70)
+
+        drawText(text = _function.description,
+                point = getCornerPoint(Corners.TOP_LEFT),
+                offsetX = 40,
+                offsetY = 25)
     }
 
 
@@ -78,7 +87,8 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         var value = _min
         val step = getFunctionLengthX() / 1000
 
-        var lastPoint = _leftPointX
+        var lastPoint = Point.of(x = valueToPixels(value),
+                y = yValueToPixels(_function.findAffiliationDegree(value)))
 
         while(value <= _max) {
             val point = Point.of(x = valueToPixels(value),
@@ -91,6 +101,7 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         }
     }
 
+
     private fun valueToPixels(value: Double): Int {
         val length = _leftPointX.lengthX(_rightPointX)
         val pixelsPerValue = length / getFunctionLengthX()
@@ -99,10 +110,12 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
                 _leftPointX.x
     }
 
+
     private fun areTheSameSign(_min: Double, _max: Double): Boolean {
         return (_min < 0 && _max < 0)
                 || (_min > 0 && _max > 0)
     }
+
 
     private fun getFunctionLengthX() =
             if ( areTheSameSign(_min, _max) ) {

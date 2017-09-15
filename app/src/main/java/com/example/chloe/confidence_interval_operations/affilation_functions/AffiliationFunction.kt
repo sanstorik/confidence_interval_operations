@@ -17,7 +17,15 @@ interface AffiliationFunction: Serializable {
      */
     fun findAffiliationDegree(x: Double): Double
 
+    /**
+     * Left bound of function
+     */
     fun getMinX(): Double
 
+    /**
+     * Right bound of function
+     */
     fun getMaxX(): Double
+
+    val description: String
 }

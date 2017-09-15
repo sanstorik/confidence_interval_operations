@@ -20,10 +20,30 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
     fun goToGraphActivity() {
         val intent = Intent(this, AffiliationFunctionGraphActivity::class.java)
         val bundle = Bundle()
+        bundle.putDoubleArray("triangular", getTriangularArray())
+        bundle.putDoubleArray("twoSided", getTwoSidedGausArray())
+        bundle.putDoubleArray("generalized", getGeneralizedArray())
 
-        intent.putExtra("functions", bundle)
+        intent.putExtra("bundle", bundle)
         startActivity(intent)
     }
+
+    private fun getTriangularArray() =
+            doubleArrayOf(numA_left_et.text.toString().toDouble(),
+                    c1_et.text.toString().toDouble(),
+                    c2_et.text.toString().toDouble())
+
+
+    private fun getTwoSidedGausArray() =
+            doubleArrayOf(a1_et.text.toString().toDouble(),
+                    a2_et.text.toString().toDouble(),
+                    c1_et.toString().toDouble(),
+                    c2_et.toString().toDouble())
+
+    private fun getGeneralizedArray() =
+            doubleArrayOf(a_et.text.toString().toDouble(),
+                    b_et.text.toString().toDouble(),
+                    c_et.text.toString().toDouble())
 }
 
 

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.chloe.confidence_interval_operations.R
-import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph.TriangularGraphView
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph.TriangularNumberGraphActivity
 import kotlinx.android.synthetic.main.activity_triangular_number.*
 
@@ -15,9 +14,9 @@ class TriangularNumberActivity : AppCompatActivity(), TriangularNumberActivityVi
     override val leftBoundA
         get() = numA_left_et.text.toString().toDoubleOrNull()
     override val midBoundA
-        get()= numA_mid_et.text.toString().toDoubleOrNull()
+        get()= c1_et.text.toString().toDoubleOrNull()
     override val rightBoundA
-        get() = numA_right_et.text.toString().toDoubleOrNull()
+        get() = c2_et.text.toString().toDoubleOrNull()
 
     override val leftBoundB
         get() = numB_left_et.text.toString().toDoubleOrNull()
