@@ -3,8 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph.TankerGraphView
+    <com.example.chloe.confidence_interval_operations.affilation_functions.graphs.AffiliationFunctionGraphView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/graph_gv" />
+        android:id="@+id/affiliation_function_gv" />
 </LinearLayout>

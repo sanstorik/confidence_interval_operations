@@ -34,7 +34,7 @@ abstract class CustomGraphView  @JvmOverloads constructor(
 
         _axisPaint.strokeWidth = 5.toFloat()
         _axisPaint.color = Color.BLUE
-        _axisPaint.style = Paint.Style.FILL
+        _axisPaint.style = Paint.Style.FILL_AND_STROKE
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -53,19 +53,19 @@ abstract class CustomGraphView  @JvmOverloads constructor(
                 (point.y + offsetY).toFloat(), _textPaint)
     }
 
-    protected fun drawArrowX(point: Point) {
+    protected fun drawArrowX(point: Point, axisName: String = "x") {
         val arrowRight = resources.getDrawable(R.drawable.arrow_axis_x)
         drawArrow(arrowRight, point, 30, 30)
 
-        drawText("x", point, 20, 30)
+        drawText(axisName, point, 20, 30)
     }
 
 
-    protected fun drawArrowY(point: Point) {
+    protected fun drawArrowY(point: Point, axisName: String = "y") {
         val arrow = resources.getDrawable(R.drawable.arrow_axis_y)
         drawArrow(arrow, point, 20, 20)
 
-        drawText("y", point, -60, 20)
+        drawText(axisName, point, -60, 20)
     }
 
 

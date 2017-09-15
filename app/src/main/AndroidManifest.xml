@@ -23,17 +23,19 @@
             android:name=".triangular_numbers.triangular_graph.TriangularNumberGraphActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape" />
-        <activity android:name=".OperationChooserActivity" >
-        </activity>
-        <activity android:name=".triangular_numbers.TankerFuelActivity">
+        <activity android:name=".OperationChooserActivity" />
+        <activity android:name=".triangular_numbers.TankerFuelActivity"></activity>
+        <activity
+            android:name=".triangular_numbers.triangular_graph.TankerGraphActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".affilation_functions.graphs.AffiliationFunctionGraphActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".affilation_functions.AffiliationFunctionActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity android:name=".triangular_numbers.triangular_graph.TankerGraphActivity"
-            android:screenOrientation="landscape">
         </activity>
     </application>
 
