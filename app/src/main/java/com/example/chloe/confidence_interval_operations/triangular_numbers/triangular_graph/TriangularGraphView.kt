@@ -82,10 +82,11 @@ open class TriangularGraphView @JvmOverloads constructor(
         }
     }
 
-    private fun drawLineMarker(paint: Paint, lineName: String, offsetY: Int) {
+    protected fun drawLineMarker(paint: Paint, lineName: String, offsetY: Int,
+                                 textOffsetX: Int = -30, textOffsetY: Int = 10) {
         val startingPoint = Point.of(width - width / 12, (height / 4) + offsetY)
 
-        drawText(lineName, startingPoint, -30, 10)
+        drawText(lineName, startingPoint, textOffsetX, textOffsetY)
         drawLine(startingPoint, Point.of(startingPoint.x + (width - width / 5),
                 startingPoint.y ), paint)
     }

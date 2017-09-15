@@ -48,6 +48,8 @@ class TankerGraphActivity : FragmentActivity() {
             val bundle = Bundle()
             bundle.putSerializable("leftOperand", _numbersList[position][0])
             bundle.putSerializable("rightOperand", _numbersList[position][1])
+            bundle.putInt("iteration", position)
+            bundle.putInt("maxIteration", count)
 
             fragment.arguments = bundle
 
@@ -70,9 +72,13 @@ class TankerGraphActivity : FragmentActivity() {
             val bundle = this.arguments
             val leftOperand = bundle.getSerializable("leftOperand") as TriangularNumber
             val rightOperand = bundle.getSerializable("rightOperand") as TriangularNumber
+            val iteration = bundle.getInt("iteration")
+            val maxIteration = bundle.getInt("maxIteration")
 
             view?.findViewById<TankerGraphView>(R.id.graph_gv)
-                    ?.setInitValues(leftOperand, rightOperand)
+                    ?.setInitValues(leftOperand, rightOperand,
+                            iteration = iteration,
+                            maxIteration = maxIteration)
 
             return view
         }

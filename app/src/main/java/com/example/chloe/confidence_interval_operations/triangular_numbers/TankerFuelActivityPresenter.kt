@@ -16,31 +16,52 @@ class TankerFuelActivityPresenter(private val _view: TankerFuelActivityView) {
         }
 
         _fuelLevel = _view.fuelLevel!!
+        _numbers.clear()
         makeTankerModeling()
 
         _view.goToGraph(_numbers.toTypedArray())
     }
 
+    fun getResultArray() = _numbers.toTypedArray()
+
     private fun makeTankerModeling() {
         val first = getRandomTriangularFuelQuery()
 
-        val result = _operation.execute(clearNumberToTriangular(_fuelLevel), first)
+        var previousResult = _operation.execute(clearNumberToTriangular(_fuelLevel), first)
 
+        _numbers.add(clearNumberToTriangular(_fuelLevel))
         _numbers.add(first)
-        _numbers.add(result)
+
+        while (true) {
+            val operation = getRandomTriangularFuelQuery()
+
+            _numbers.add(previousResult)
+            _numbers.add(operation)
+
+            if (operation.rightBound > previousResult.leftBound) {
+                break
+            }
+
+            previousResult = _operation.execute(previousResult, operation)
+        }
     }
 
     private fun getRandomTriangularFuelQuery(): TriangularNumber {
-        val random = Random()
-        val currentFuelLevel = _fuelLevel.toInt()
+        val fuelLevel = _fuelLevel.toInt()
 
-        val leftBound = 50
-        val rightBound = random.nextInt(currentFuelLevel + 1 - 51) + 51
-        val mid = random.nextInt(rightBound - leftBound) + leftBound
+        val leftBound = random(50, 50 + fuelLevel / 10)
+        val rightBound = random(leftBound + fuelLevel / 10, fuelLevel / 2)
+        val mid = random(leftBound, rightBound)
 
         return TriangularNumber.of(leftBound.toDouble(), mid.toDouble(), rightBound.toDouble())
     }
 
     private fun clearNumberToTriangular(number: Double) =
             TriangularNumber.of(number, number, number)
+
+    /**
+     * @return random number in range [min, max]
+     */
+    private fun random(min: Int, max: Int) =
+            Random().nextInt(max + 1 - min) + min
 }

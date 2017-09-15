@@ -35,10 +35,7 @@ class TankerFuelActivity : AppCompatActivity(), TankerFuelActivityView {
         val intent = Intent(this, TankerGraphActivity::class.java)
         val bundle = Bundle()
 
-        bundle.putSerializable("arr", arrayOf(TriangularNumber.of(0.0, 5.0, 17.0),
-                TriangularNumber.of(50.0, 50.0, 50.0),
-                TriangularNumber.of(4.0, 12.0, 17.0),
-                TriangularNumber.of(15.0, 20.0, 35.5)))
+        bundle.putSerializable("arr", _presenter.getResultArray())
         intent.putExtra("arr", bundle)
 
         startActivity(intent)
