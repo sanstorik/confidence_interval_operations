@@ -22,25 +22,22 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
         setContentView(R.layout.activity_affiliation_function_graph)
 
         if (intent.extras != null) {
-            val triangularValues = intent.extras.getDoubleArray("triangular")
-            val twoSidedValues = intent.extras.getDoubleArray("twoSided")
-            val generalizedValues = intent.extras.getDoubleArray("generalizedValues")
+            val bundle = intent.extras.getBundle("bundle")
+            val triangularValues = bundle.getDoubleArray("triangular")
+            val twoSidedValues = bundle.getDoubleArray("twoSided")
+            val generalizedValues = bundle.getDoubleArray("generalized")
 
             _functionsAdapter.add(TriangularAffiliationFunction(a = triangularValues[0],
                     b = triangularValues[1], c = triangularValues[2]))
-            //-100, 10, 200
 
             _functionsAdapter.add(
                     TwoSidedGaussAffiliationFunction(a1 = twoSidedValues[0],
                             c1 = twoSidedValues[2], c2 = twoSidedValues[3], a2 = twoSidedValues[1]))
-            //6, 11, 15, 10
+
             _functionsAdapter.add(GeneralizedAffiliationFunction(a = generalizedValues[0],
                     c = generalizedValues[2], b = generalizedValues[1]))
 
-            //7, 4, 8
 
-
-            //custom
             _functionsAdapter.add(
                     TrapezoidalAffiliationFunction(a = 200.0, b = 220.0, c = 240.0, d = 250.0))
             _functionsAdapter.add(GaussSymmetricAffiliationFunction(a = 3.0, b = 15.0, c = 2.0))
@@ -98,7 +95,7 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
             view.findViewById<AffiliationFunctionGraphView>(
                     R.id.affiliation_function_gv
-            )?.startingInit(function = function)
+            ).startingInit(function)
 
             return view
         }
