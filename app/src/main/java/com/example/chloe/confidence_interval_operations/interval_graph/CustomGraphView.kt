@@ -53,6 +53,15 @@ abstract class CustomGraphView  @JvmOverloads constructor(
                 (point.y + offsetY).toFloat(), _textPaint)
     }
 
+    protected fun drawLineMarker(paint: Paint, lineName: String, offsetY: Int,
+                                 textOffsetX: Int = -30, textOffsetY: Int = 10) {
+        val startingPoint = Point.of(width - width / 12, (height / 4) + offsetY)
+
+        drawText(lineName, startingPoint, textOffsetX, textOffsetY)
+        drawLine(startingPoint, Point.of(startingPoint.x + (width - width / 5),
+                startingPoint.y ), paint)
+    }
+
     protected fun drawArrowX(point: Point, axisName: String = "x") {
         val arrowRight = resources.getDrawable(R.drawable.arrow_axis_x)
         drawArrow(arrowRight, point, 30, 30)

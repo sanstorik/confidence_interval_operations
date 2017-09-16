@@ -23,28 +23,72 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
     private var _min = 0.0
     private var _max = 0.0
 
-    private var _funcPaint = Paint()
+    private var _secondFunction: AffiliationFunction? = null
+    private var _steps = 70
+
+    private val _funcPaint = Paint()
+    private val _secondFuncPaint = Paint()
+    private val _euclidDistancePaint = Paint()
+    private val _hamilgtonDistancePaint = Paint()
 
     init {
         _funcPaint.strokeWidth = 8.toFloat()
         _funcPaint.color = Color.BLACK
         _funcPaint.style = Paint.Style.FILL_AND_STROKE
+
+        _secondFuncPaint.set(_funcPaint)
+        _secondFuncPaint.color = Color.MAGENTA
+
+        _euclidDistancePaint.set(_funcPaint)
+        _euclidDistancePaint.color = Color.GREEN
+
+        _hamilgtonDistancePaint.set(_funcPaint)
+        _hamilgtonDistancePaint.color = Color.RED
     }
 
     override fun onDraw(canvas: Canvas?) {
         _canvas = canvas!!
 
         drawAxes()
-        drawFunction()
+        drawFunction(_function)
+
+        if (_secondFunction != null) {
+            drawFunction(_secondFunction!!, _secondFuncPaint)
+
+            val hamDistance = drawHamilgtonDistance(_hamilgtonDistancePaint, _steps)
+            val euclidDistance = drawEuclidDistance(_euclidDistancePaint, _steps)
+
+            drawLineMarker(_funcPaint, "A", offsetY = 0)
+            drawLineMarker(_secondFuncPaint, "B", offsetY = 30)
+            drawLineMarker(_hamilgtonDistancePaint, "Haming", offsetY = 120, textOffsetY = -20)
+            drawLineMarker(_euclidDistancePaint, "Euclid", offsetY = 175, textOffsetY = -20)
+
+            drawText("Haming dist = $hamDistance", getCornerPoint(Corners.TOP_RIGHT),
+                    offsetY = 40, offsetX = -350)
+            drawText("Euclid dist = $euclidDistance", getCornerPoint(Corners.TOP_RIGHT),
+                    offsetY = 80, offsetX = -350)
+        }
     }
 
 
-    fun startingInit(function: AffiliationFunction) {
+    fun startingInit(function: AffiliationFunction,
+                     secondFunction: AffiliationFunction? = null,
+                     steps: Int = 0) {
         _function = function
 
-        _min = _function.getMinX() *
-                if (areTheSameSign(_function.getMinX(), _function.getMaxX())) 0.85 else 1.35
-        _max = _function.getMaxX() * 1.15
+        _min = _function.getMinX()
+        _max = _function.getMaxX()
+
+        if (secondFunction != null) {
+            _secondFunction = secondFunction
+            _steps = steps
+
+            _min = Math.min(_min, _secondFunction!!.getMinX())
+            _max = Math.max(_max, _secondFunction!!.getMaxX())
+        }
+
+        _min *=  if (areTheSameSign(_min, _max)) 0.85 else 1.35
+        _max *= 1.15
     }
 
 
@@ -83,23 +127,74 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
     }
 
 
-    private fun drawFunction() {
+    private fun drawFunction(function: AffiliationFunction, paint: Paint = _funcPaint) {
         var value = _min
         val step = getFunctionLengthX() / 1000
 
         var lastPoint = Point.of(x = valueToPixels(value),
-                y = yValueToPixels(_function.findAffiliationDegree(value)))
+                y = yValueToPixels(function.findAffiliationDegree(value)))
 
         while(value <= _max) {
             val point = Point.of(x = valueToPixels(value),
-                    y = yValueToPixels(_function.findAffiliationDegree(value)))
+                    y = yValueToPixels(function.findAffiliationDegree(value)))
 
-            drawLine(lastPoint, point, _funcPaint)
+            drawLine(lastPoint, point, paint)
 
             value += step
             lastPoint = point
         }
     }
+
+
+    private fun drawHamilgtonDistance(paint: Paint, steps: Int): Double {
+        return drawDistance(paint, steps,
+                { hamiltonDistance(_function, _secondFunction!!, it) }
+        )
+    }
+
+    private fun drawEuclidDistance(paint: Paint, steps: Int): Double {
+        return Math.sqrt(drawDistance(paint, steps,
+                { euclidDistance(_function, _secondFunction!!, it) }
+        ))
+    }
+
+    private fun drawDistance(paint: Paint, steps: Int,
+                             distanceCalc: (_value: Double) -> Double): Double {
+        var value = _min
+        val step = getFunctionLengthX() / steps
+        var distance = 0.0
+
+        var lastPoint = Point.of(x = valueToPixels(value),
+                y = yValueToPixels(distanceCalc(value)))
+
+        while(value <= _max) {
+            val point = Point.of(x = valueToPixels(value),
+                    y = yValueToPixels(distanceCalc(value)))
+
+            drawLine(lastPoint, point, paint)
+
+            value += step
+            lastPoint = point
+            distance += Math.abs(distanceCalc(value))
+        }
+
+        return distance
+    }
+
+    private fun hamiltonDistance(firstFunc: AffiliationFunction,
+                                 secondFunc: AffiliationFunction,
+                                 xValue: Double): Double {
+        return Math.abs(firstFunc.findAffiliationDegree(xValue)
+                - secondFunc.findAffiliationDegree(xValue))
+    }
+
+    private fun euclidDistance(firstFunc: AffiliationFunction,
+                               secondFunc: AffiliationFunction,
+                               xValue: Double): Double {
+        return Math.pow((firstFunc.findAffiliationDegree(xValue) -
+                secondFunc.findAffiliationDegree(xValue)), 2.0)
+    }
+
 
 
     private fun valueToPixels(value: Double): Int {

@@ -115,7 +115,7 @@
             android:inputType="number|numberSigned|numberDecimal"
             android:textColor="@color/text_color"
             android:textSize="25sp"
-            android:text="-100" />
+            android:text="2" />
 
         <EditText
             android:id="@+id/numA_mid_et"
@@ -130,7 +130,7 @@
             android:inputType="number|numberSigned|numberDecimal"
             android:textColor="@color/text_color"
             android:textSize="25sp"
-            android:text="10" />
+            android:text="4" />
 
         <EditText
             android:id="@+id/numA_righ_et"
@@ -145,7 +145,7 @@
             android:inputType="number|numberSigned|numberDecimal"
             android:textColor="@color/text_color"
             android:textSize="25sp"
-            android:text="200" />
+            android:text="5" />
 
     </LinearLayout>
 
@@ -247,5 +247,228 @@
             android:text="8" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1.2"
+            android:lines="1"
+            android:text="Triangular A"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/numA1_left_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="1" />
+
+        <EditText
+            android:id="@+id/numA1_mid_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="4" />
+
+        <EditText
+            android:id="@+id/numA1_righ_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/a1_1_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="2" />
+
+        <EditText
+            android:id="@+id/a2_1_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:contentDescription="a2"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="3" />
+
+        <EditText
+            android:id="@+id/c1_1_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:contentDescription="c1"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="12" />
+
+        <EditText
+            android:id="@+id/c2_1_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:contentDescription="c2"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="18" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearLayout6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/a_1_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:contentDescription="a2"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="3" />
+
+        <EditText
+            android:id="@+id/b_1_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:contentDescription="c1"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="6" />
+
+        <EditText
+            android:id="@+id/c_1_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/border"
+            android:contentDescription="c2"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:text="10" />
+
+    </LinearLayout>
+
+    <Switch
+        android:text="Is second func needed "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="38dp"
+        android:id="@+id/isSecond_switch"
+        android:textSize="25sp"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_above="@+id/button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center" />
 
 </RelativeLayout>

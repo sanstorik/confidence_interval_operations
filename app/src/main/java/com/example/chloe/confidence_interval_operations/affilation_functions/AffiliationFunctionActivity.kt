@@ -31,8 +31,8 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
         if (numA_left_et.text.isEmpty() || numA_mid_et.text.isEmpty()
                 || numA_righ_et.text.isEmpty() || a1_et.text.isEmpty()
                 || a2_et.text.isEmpty() || c1_et.text.isEmpty()
-                || c2_et.text.isEmpty() || a_et.text.isEmpty() ||
-                b_et.text.isEmpty() || c_et.text.isEmpty()) {
+                || c2_et.text.isEmpty() || a_et.text.isEmpty()
+                || b_et.text.isEmpty() || c_et.text.isEmpty()) {
             showErrorMessage("Something is empty")
             return
         }
@@ -42,6 +42,21 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
         bundle.putDoubleArray("triangular", getTriangularArray())
         bundle.putDoubleArray("twoSided", getTwoSidedGausArray())
         bundle.putDoubleArray("generalized", getGeneralizedArray())
+
+        if (isSecond_switch.isChecked) {
+            if (numA1_left_et.text.isEmpty() || numA1_mid_et.text.isEmpty()
+                    || numA1_righ_et.text.isEmpty() || a1_1_et.text.isEmpty()
+                    || a2_1_et.text.isEmpty() || c1_1_et.text.isEmpty()
+                    || c2_1_et.text.isEmpty() || a_1_et.text.isEmpty()
+                    || b_1_et.text.isEmpty() || c_1_et.text.isEmpty()) {
+                showErrorMessage("Second array is empty")
+                return
+            }
+
+            bundle.putDoubleArray("triangularSecond", getSecondTriangularArray())
+            bundle.putDoubleArray("twoSidedSecond", getSecondTwoSidedGausArray())
+            bundle.putDoubleArray("generalizedSecond", getSecondGeneralizedArray())
+        }
 
         intent.putExtra("bundle", bundle)
         startActivity(intent)
@@ -63,6 +78,25 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
             doubleArrayOf(a_et.text.toString().toDouble(),
                     b_et.text.toString().toDouble(),
                     c_et.text.toString().toDouble())
+
+
+
+    private fun getSecondTriangularArray() =
+        doubleArrayOf(numA1_left_et.text.toString().toDouble(),
+                numA1_mid_et.text.toString().toDouble(),
+                numA1_righ_et.text.toString().toDouble())
+
+
+    private fun getSecondTwoSidedGausArray() =
+            doubleArrayOf(a1_1_et.text.toString().toDouble(),
+                    a2_1_et.text.toString().toDouble(),
+                    c1_1_et.text.toString().toDouble(),
+                    c2_1_et.text.toString().toDouble())
+
+    private fun getSecondGeneralizedArray() =
+            doubleArrayOf(a_1_et.text.toString().toDouble(),
+                    b_1_et.text.toString().toDouble(),
+                    c_1_et.text.toString().toDouble())
 }
 
 
