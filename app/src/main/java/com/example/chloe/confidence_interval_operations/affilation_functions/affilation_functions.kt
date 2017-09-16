@@ -272,5 +272,22 @@ class SquareAffiliationFunction (
 }
 
 
+class ClearSetAffiliationFunction(
+        private val _func: AffiliationFunction
+): AffiliationFunction {
+
+    override fun findAffiliationDegree(x: Double) = when {
+        _func.findAffiliationDegree(x) <= 0.5 -> 0.0
+        else -> 1.0
+    }
+
+    override fun getMinX() = _func.getMinX()
+
+    override fun getMaxX() = _func.getMaxX()
+
+    override val description = "clear set"
+}
+
+
 
 

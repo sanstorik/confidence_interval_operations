@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import com.example.chloe.confidence_interval_operations.affilation_functions.AffiliationFunction
+import com.example.chloe.confidence_interval_operations.affilation_functions.ClearSetAffiliationFunction
 import com.example.chloe.confidence_interval_operations.interval_graph.CustomGraphView
 import com.example.chloe.confidence_interval_operations.interval_graph.Point
 
@@ -25,11 +26,14 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
 
     private var _secondFunction: AffiliationFunction? = null
     private var _steps = 70
+    private var _drawUnclearIndex = false
+    private lateinit var _clearSet: ClearSetAffiliationFunction
 
     private val _funcPaint = Paint()
     private val _secondFuncPaint = Paint()
     private val _euclidDistancePaint = Paint()
     private val _hamilgtonDistancePaint = Paint()
+    private val _clearSetPaint = Paint()
 
     init {
         _funcPaint.strokeWidth = 8.toFloat()
@@ -41,9 +45,15 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
 
         _euclidDistancePaint.set(_funcPaint)
         _euclidDistancePaint.color = Color.GREEN
+        _euclidDistancePaint.alpha = 200
 
         _hamilgtonDistancePaint.set(_funcPaint)
         _hamilgtonDistancePaint.color = Color.RED
+        _hamilgtonDistancePaint.alpha = 200
+
+        _clearSetPaint.set(_funcPaint)
+        _clearSetPaint.color = Color.RED
+        _clearSetPaint.alpha = 100
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -63,18 +73,35 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
             drawLineMarker(_hamilgtonDistancePaint, "Haming", offsetY = 120, textOffsetY = -20)
             drawLineMarker(_euclidDistancePaint, "Euclid", offsetY = 175, textOffsetY = -20)
 
-            drawText("Haming dist = $hamDistance", getCornerPoint(Corners.TOP_RIGHT),
-                    offsetY = 40, offsetX = -350)
-            drawText("Euclid dist = $euclidDistance", getCornerPoint(Corners.TOP_RIGHT),
-                    offsetY = 80, offsetX = -350)
+            drawText("Haming = $hamDistance", getCornerPoint(Corners.TOP_RIGHT),
+                    offsetY = 25, offsetX = -340)
+            drawText("Euclid  = $euclidDistance", getCornerPoint(Corners.TOP_RIGHT),
+                    offsetY = 65, offsetX = -340)
+
+        } else if (_drawUnclearIndex) {
+            _clearSet = ClearSetAffiliationFunction(_function)
+
+            drawFunction(_clearSet, _clearSetPaint)
+
+            val hamDistance = calculateHamilgtonDistance(_clearSet, _steps)
+            val euclidDistance = calculateEuclidDistance(_clearSet, _steps)
+
+            drawText("Linear index = ${ (2 / _steps.toDouble()) * hamDistance }",
+                    getCornerPoint(Corners.TOP_RIGHT),
+                    offsetY = 25, offsetX = -350)
+            drawText("Square index = ${ ((2 / Math.sqrt(_steps.toDouble()))
+                    * euclidDistance) }", getCornerPoint(Corners.TOP_RIGHT),
+                    offsetY = 65, offsetX = -350)
         }
     }
 
 
     fun startingInit(function: AffiliationFunction,
                      secondFunction: AffiliationFunction? = null,
-                     steps: Int = 0) {
+                     steps: Int = 0,
+                     drawUnclearIndex: Boolean) {
         _function = function
+        _drawUnclearIndex = drawUnclearIndex
 
         _min = _function.getMinX()
         _max = _function.getMaxX()
@@ -145,18 +172,36 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         }
     }
 
+    private fun calculateDistance(distanceCalc: (_value: Double) -> Double, steps: Int): Double {
+        var value = _min
+        val step = getFunctionLengthX() / steps
+        var distance = 0.0
 
-    private fun drawHamilgtonDistance(paint: Paint, steps: Int): Double {
-        return drawDistance(paint, steps,
-                { hamiltonDistance(_function, _secondFunction!!, it) }
-        )
+        while(value < _max) {
+            value += step
+            distance += Math.abs(distanceCalc(value))
+        }
+
+        return distance
     }
 
-    private fun drawEuclidDistance(paint: Paint, steps: Int): Double {
-        return Math.sqrt(drawDistance(paint, steps,
-                { euclidDistance(_function, _secondFunction!!, it) }
-        ))
-    }
+
+    private fun calculateHamilgtonDistance(function: AffiliationFunction, steps: Int) =
+            calculateDistance({ hamiltonDistance(_function, function, it)}, steps)
+
+    private fun calculateEuclidDistance(function: AffiliationFunction, steps: Int) =
+            calculateDistance({ euclidDistance(_function, function, it)}, steps)
+
+
+    private fun drawHamilgtonDistance(paint: Paint, steps: Int): Double =
+         drawDistance(paint, steps,
+                { hamiltonDistance(_function, _secondFunction!!, it) } )
+
+
+    private fun drawEuclidDistance(paint: Paint, steps: Int) =
+            Math.sqrt(drawDistance(paint, steps,
+                    { euclidDistance(_function, _secondFunction!!, it) }) )
+
 
     private fun drawDistance(paint: Paint, steps: Int,
                              distanceCalc: (_value: Double) -> Double): Double {
@@ -224,8 +269,7 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
      */
     private fun yValueToPixels(value: Double): Int {
         val length = _leftPointX.lengthY(_leftStartingPointOne)
-        val pixelsPerValue = length
 
-        return (-value * pixelsPerValue).toInt() + _leftPointX.y
+        return (-value * length).toInt() + _leftPointX.y
     }
 }

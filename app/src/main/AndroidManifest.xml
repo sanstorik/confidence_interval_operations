@@ -36,7 +36,8 @@
         <activity
             android:name=".affilation_functions.graphs.AffiliationFunctionGraphActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".affilation_functions.AffiliationFunctionActivity">
+        <activity android:name=".affilation_functions.AffiliationFunctionActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

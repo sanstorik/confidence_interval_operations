@@ -14,15 +14,20 @@ import kotlinx.android.synthetic.main.activity_affiliation_function_graph.*
 
 class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
-    private val _functionsAdapter
-            by lazy { AffiliationFunctionPagerAdapter(supportFragmentManager) }
+    private lateinit var _functionsAdapter: AffiliationFunctionPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_affiliation_function_graph)
 
+        var steps = 0
+        var drawIndex = false
+
         if (intent.extras != null) {
+
             val bundle = intent.extras.getBundle("bundle")
+
+            steps = bundle.getInt("steps")
             val triangularValues = bundle.getDoubleArray("triangular")
             val twoSidedValues = bundle.getDoubleArray("twoSided")
             val generalizedValues = bundle.getDoubleArray("generalized")
@@ -35,6 +40,18 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
             var twoSided: TwoSidedGaussAffiliationFunction? = null
             var generalized: GeneralizedAffiliationFunction? = null
 
+            var trapezoidal: TrapezoidalAffiliationFunction? = null
+            var gausSymmetric: GaussSymmetricAffiliationFunction? = null
+            var sigmoid: SigmoidAffiliationFunction? = null
+            var sigmoidMul: SigmoidMulAffiliationFunction? = null
+            var sigmoidSubstr: SigmoidSubstrAffiliationFunction? = null
+            var zLookALike: ZLookAlikeAffiliationFunction? = null
+            var sLookALike: SLookAlikeAffiliationFunction? = null
+            var piLookALike: PiLookAlikeAffiliationFunction? = null
+            var laplas: LaplasAffiliationFunction? = null
+            var square: SquareAffiliationFunction? = null
+
+
             if (triangularSecond != null) {
                 triangular = TriangularAffiliationFunction(a = triangularSecond[0],
                         b = triangularSecond[1], c = triangularSecond[2])
@@ -45,8 +62,42 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
                 generalized = GeneralizedAffiliationFunction(a = generalizedSecond[0],
                         c = generalizedSecond[2], b = generalizedSecond[1])
+
+                trapezoidal =
+                        TrapezoidalAffiliationFunction(a = 150.0, b = 200.0, c = 260.0, d = 300.0)
+
+                gausSymmetric =
+                        GaussSymmetricAffiliationFunction(a = 1.0, b = 4.0, c = 5.0)
+
+                sigmoid =
+                        SigmoidAffiliationFunction(a = 4.0, c = 2.0)
+
+                sigmoidMul =
+                        SigmoidMulAffiliationFunction(a1 = -0.3, a2 = 0.3, c1 = 0.03, c2 = 0.014)
+
+                sigmoidSubstr =
+                        SigmoidSubstrAffiliationFunction(a1 = 15.0, a2 = 2.0, c1 = 7.0, c2 = 19.0)
+
+                zLookALike =
+                        ZLookAlikeAffiliationFunction(a = -1.0, b = 7.0)
+
+                sLookALike =
+                        SLookAlikeAffiliationFunction(a = -1.0, b = 7.0)
+
+                piLookALike =
+                        PiLookAlikeAffiliationFunction(a = 2.5, b = 2.0, c = 7.0, d = 12.0)
+
+                laplas =
+                        LaplasAffiliationFunction(b = 2.0, d = 7.0)
+
+                square = SquareAffiliationFunction(a = 1.0, b = 8.0)
+
+            } else if (bundle.getBoolean("unclearIndexChecked")) {
+                drawIndex = true
             }
 
+            _functionsAdapter = AffiliationFunctionPagerAdapter(supportFragmentManager,
+                    steps, drawIndex)
 
             _functionsAdapter.add(TriangularAffiliationFunction(a = triangularValues[0],
                     b = triangularValues[1], c = triangularValues[2]), triangular)
@@ -62,43 +113,43 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
             _functionsAdapter.add(
                     TrapezoidalAffiliationFunction(a = 200.0, b = 220.0, c = 240.0, d = 250.0),
-                    TrapezoidalAffiliationFunction(a = 150.0, b = 200.0, c = 260.0, d = 300.0))
+                    trapezoidal)
 
             _functionsAdapter.add(
                     GaussSymmetricAffiliationFunction(a = 3.0, b = 15.0, c = 2.0),
-                    GaussSymmetricAffiliationFunction(a = 1.0, b = 4.0, c = 5.0))
+                    gausSymmetric)
 
             _functionsAdapter.add(
                     SigmoidAffiliationFunction(a = 1.0, c = 4.0),
-                    SigmoidAffiliationFunction(a = 4.0, c = 2.0))
+                    sigmoid)
 
             _functionsAdapter.add(
                     SigmoidMulAffiliationFunction(a1 = -0.2, a2 = 0.05, c1 = 0.003, c2 = 0.007),
-                    SigmoidMulAffiliationFunction(a1 = -0.3, a2 = 0.3, c1 = 0.03, c2 = 0.014))
+                    sigmoidMul)
 
             _functionsAdapter.add(
                     SigmoidSubstrAffiliationFunction(a1 = 10.0, a2 = 3.0, c1 = 9.0, c2 = 17.0),
-                    SigmoidSubstrAffiliationFunction(a1 = 15.0, a2 = 2.0, c1 = 7.0, c2 = 19.0))
+                    sigmoidSubstr)
 
             _functionsAdapter.add(
                     ZLookAlikeAffiliationFunction(a = -2.0, b = 10.0),
-                    ZLookAlikeAffiliationFunction(a = -1.0, b = 7.0))
+                    zLookALike)
 
             _functionsAdapter.add(
                     SLookAlikeAffiliationFunction(a = -2.0, b = 10.0),
-                    SLookAlikeAffiliationFunction(a = -1.0, b = 7.0))
+                    sLookALike)
 
             _functionsAdapter.add(
                     PiLookAlikeAffiliationFunction(a = 1.0, b = 4.0, c = 5.0, d = 9.0),
-                    PiLookAlikeAffiliationFunction(a = 2.5, b = 2.0, c = 7.0, d = 12.0))
+                    piLookALike)
 
             _functionsAdapter.add(
                     LaplasAffiliationFunction(b = 3.0, d = 5.0),
-                    LaplasAffiliationFunction(b = 2.0, d = 7.0))
+                    laplas)
 
             _functionsAdapter.add(
                     SquareAffiliationFunction(a = 4.0, b = 10.0),
-                    SquareAffiliationFunction(a = 1.0, b = 8.0))
+                    square)
 
             function_pager.adapter = _functionsAdapter
         }
@@ -106,7 +157,9 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
 
     class AffiliationFunctionPagerAdapter (
-            fragmentManager: FragmentManager
+            fragmentManager: FragmentManager,
+            private val _steps: Int,
+            private val drawClearIndex: Boolean
     ): FragmentStatePagerAdapter(fragmentManager) {
 
         private val _functions = ArrayList<AffiliationFunction>()
@@ -120,6 +173,8 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putSerializable("function", _functions[position])
             bundle.putSerializable("secondFunction", _secondFunctions[position])
+            bundle.putInt("steps", _steps)
+            bundle.putBoolean("unclearIndex", drawClearIndex)
 
 
             fragment.arguments = bundle
@@ -145,6 +200,8 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
             val function = arguments.getSerializable("function") as AffiliationFunction
             val secondFunction = arguments.getSerializable("secondFunction")
+            val steps = arguments.getInt("steps")
+            val drawIndex = arguments.getBoolean("unclearIndex")
 
             view.findViewById<AffiliationFunctionGraphView>(
                     R.id.affiliation_function_gv
@@ -153,7 +210,9 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
                         null
                     } else {
                         secondFunction as AffiliationFunction
-                    }, steps = 70)
+                    },
+                    steps = steps,
+                    drawUnclearIndex = drawIndex)
 
             return view
         }

@@ -150,12 +150,13 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Input triangular values"
         android:textAlignment="center"
-        android:textSize="25sp"
-        android:id="@+id/textView9" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/textView10"
@@ -165,6 +166,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="Input two-sided Gauss"
         android:textAlignment="center"
         android:textSize="25sp" />
@@ -173,21 +175,23 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Go"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearlayout_8"
+        android:layout_marginTop="5dp"
+        android:text="Go" />
 
     <TextView
         android:id="@+id/generalized_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout2"
+        android:gravity="center"
         android:text="Input generalized function"
         android:textAlignment="center"
-        android:textSize="25sp"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="25sp" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -252,12 +256,12 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout3"
-        android:layout_marginTop="50dp">
+        android:layout_centerVertical="true"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
@@ -283,9 +287,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="1"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="1" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/numA1_mid_et"
@@ -298,9 +302,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="4"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="4" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/numA1_righ_et"
@@ -313,9 +317,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="5"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="5" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 
@@ -455,20 +459,77 @@
     </LinearLayout>
 
     <Switch
-        android:text="Is second func needed "
+        android:id="@+id/isSecond_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="38dp"
-        android:id="@+id/isSecond_switch"
-        android:textSize="25sp"
-        android:paddingLeft="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:layout_above="@+id/button"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:textAlignment="center" />
+        android:layout_below="@+id/linearLayout7"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:lines="1"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:text="Search length"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+
+    <Switch
+        android:id="@+id/unclearIndex_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/isSecond_switch"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:lines="1"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:text="Unclear index"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/unclearIndex_switch"
+        android:elevation="24dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/unclearIndex_switch"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Steps"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/steps_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberSigned"
+            android:text="70"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </RelativeLayout>

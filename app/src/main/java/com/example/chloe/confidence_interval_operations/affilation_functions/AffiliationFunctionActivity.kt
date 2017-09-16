@@ -43,6 +43,8 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
         bundle.putDoubleArray("twoSided", getTwoSidedGausArray())
         bundle.putDoubleArray("generalized", getGeneralizedArray())
 
+        bundle.putInt("steps", steps_et.text.toString().toInt())
+
         if (isSecond_switch.isChecked) {
             if (numA1_left_et.text.isEmpty() || numA1_mid_et.text.isEmpty()
                     || numA1_righ_et.text.isEmpty() || a1_1_et.text.isEmpty()
@@ -56,6 +58,8 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
             bundle.putDoubleArray("triangularSecond", getSecondTriangularArray())
             bundle.putDoubleArray("twoSidedSecond", getSecondTwoSidedGausArray())
             bundle.putDoubleArray("generalizedSecond", getSecondGeneralizedArray())
+        } else if (unclearIndex_switch.isChecked) {
+            bundle.putBoolean("unclearIndexChecked", true)
         }
 
         intent.putExtra("bundle", bundle)
