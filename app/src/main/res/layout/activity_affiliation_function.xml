@@ -5,6 +5,32 @@
     android:background="@drawable/bg2">
 
     <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="24dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearlayout_8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Spinner
+            android:id="@+id/operation_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/rounded_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text="Rounded" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -113,7 +139,7 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
-            android:text="2"
+            android:text="0"
             android:textColor="@color/text_color"
             android:textSize="25sp" />
 
@@ -128,7 +154,7 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
-            android:text="4"
+            android:text="3"
             android:textColor="@color/text_color"
             android:textSize="25sp" />
 
@@ -156,7 +182,7 @@
         android:gravity="center"
         android:text="Input triangular values"
         android:textAlignment="center"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView10"
@@ -169,7 +195,7 @@
         android:gravity="center"
         android:text="Input two-sided Gauss"
         android:textAlignment="center"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/button"
@@ -177,8 +203,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearlayout_8"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/linearLayout10"
         android:text="Go" />
 
     <TextView
@@ -191,7 +216,7 @@
         android:gravity="center"
         android:text="Input generalized function"
         android:textAlignment="center"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -260,7 +285,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout3"
         android:layout_centerVertical="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -317,7 +342,7 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
-            android:text="5"
+            android:text="6"
             android:textColor="@color/text_color"
             android:textSize="25sp" />
 
@@ -344,9 +369,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="2"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="2" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/a2_1_et"
@@ -360,9 +385,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="3"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="3" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/c1_1_et"
@@ -376,9 +401,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="12"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="12" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/c2_1_et"
@@ -392,9 +417,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="18"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="18" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 
@@ -420,9 +445,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="3"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="3" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/b_1_et"
@@ -436,9 +461,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="6"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="6" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/c_1_et"
@@ -452,9 +477,9 @@
             android:ems="10"
             android:hint="0"
             android:inputType="number|numberSigned|numberDecimal"
+            android:text="10"
             android:textColor="@color/text_color"
-            android:textSize="25sp"
-            android:text="10" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 

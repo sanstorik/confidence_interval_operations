@@ -4,18 +4,45 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.chloe.confidence_interval_operations.R
 import com.example.chloe.confidence_interval_operations.affilation_functions.graphs.AffiliationFunctionGraphActivity
+import com.example.chloe.confidence_interval_operations.set_operations.*
 import kotlinx.android.synthetic.main.activity_affiliation_function.*
 
 class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView {
     private val _presenter by lazy { AffiliationFunctionActivityPresenter(this) }
+    private var _setOperation: CommonSetOperation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_affiliation_function)
 
         button.setOnClickListener { goToGraphActivity() }
+        operation_spinner.adapter = ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,
+                arrayOf("None", "Adding", "Substracting", "Dividing", "Multiplying",
+                        "Max", "Min")
+        )
+
+        operation_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                _setOperation = when (p2) {
+                    1 -> AddingSetOperation()
+                    2 -> SubstractingSetOperation()
+                    3 -> DividingSetOperation()
+                    4 -> MultiplySetOperation()
+                    5 -> MaxSetOperation()
+                    6 -> MinSetOperation()
+                    else -> null
+                }
+            }
+        }
     }
 
     fun showErrorMessage(msg: String) {
@@ -58,6 +85,12 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
             bundle.putDoubleArray("triangularSecond", getSecondTriangularArray())
             bundle.putDoubleArray("twoSidedSecond", getSecondTwoSidedGausArray())
             bundle.putDoubleArray("generalizedSecond", getSecondGeneralizedArray())
+
+            if (_setOperation != null) {
+                bundle.putBoolean("graphRounded", rounded_switch.isChecked)
+                bundle.putSerializable("setOperation", _setOperation)
+            }
+
         } else if (unclearIndex_switch.isChecked) {
             bundle.putBoolean("unclearIndexChecked", true)
         } else if (entropy_switch.isChecked) {

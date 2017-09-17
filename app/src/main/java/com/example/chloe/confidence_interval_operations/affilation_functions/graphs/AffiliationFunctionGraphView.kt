@@ -5,12 +5,15 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import com.example.chloe.confidence_interval_operations.affilation_functions.AffiliationFunction
 import com.example.chloe.confidence_interval_operations.affilation_functions.ClearSetAffiliationFunction
 import com.example.chloe.confidence_interval_operations.affilation_functions.EntropyHAffiliationFunction
 import com.example.chloe.confidence_interval_operations.affilation_functions.PiEntropyAffiliationFunction
 import com.example.chloe.confidence_interval_operations.interval_graph.CustomGraphView
 import com.example.chloe.confidence_interval_operations.interval_graph.Point
+import com.example.chloe.confidence_interval_operations.set_operations.CommonSetOperation
+import com.example.chloe.confidence_interval_operations.set_operations.Singleton
 
 class AffiliationFunctionGraphView @JvmOverloads constructor(
         _context: Context,
@@ -39,6 +42,14 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
     private val _hamilgtonDistancePaint = Paint()
     private val _clearSetPaint = Paint()
 
+    private var _setOperation: CommonSetOperation? = null
+    private var _setOperationStep = 0.0
+    private var _roundedGraph = false
+
+    private var _setA: Array<Singleton>? = null
+    private var _setB: Array<Singleton>? = null
+    private var _setC: Array<Singleton>? = null
+
     init {
         _funcPaint.strokeWidth = 8.toFloat()
         _funcPaint.color = Color.BLACK
@@ -64,9 +75,17 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         _canvas = canvas!!
 
         drawAxes()
-        drawFunction(_function)
 
-        if (_secondFunction != null) {
+        if (_setOperation == null) {
+            drawFunction(_function, _funcPaint)
+        }
+
+        if (_setOperation != null && _secondFunction != null) {
+            drawSingletons(_setA!!, _hamilgtonDistancePaint)
+            drawSingletons(_setB!!, _euclidDistancePaint)
+            drawSingletons(_setC!!, _funcPaint)
+
+        } else if (_secondFunction != null) {
             drawFunction(_secondFunction!!, _secondFuncPaint)
 
             val hamDistance = drawHamilgtonDistance(_hamilgtonDistancePaint, _steps)
@@ -96,6 +115,7 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
             drawText("Square index = ${ ((2 / Math.sqrt(_steps.toDouble()))
                     * euclidDistance) }", getCornerPoint(Corners.TOP_RIGHT),
                     offsetY = 65, offsetX = -350)
+
         } else if (_drawEntropy) {
             val entropy  = calculateEntropy(_function, _steps)
             drawText("Entropy =  $entropy", getCornerPoint(Corners.TOP_RIGHT),
@@ -114,22 +134,40 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
                      secondFunction: AffiliationFunction? = null,
                      steps: Int = 0,
                      drawUnclearIndex: Boolean,
-                     drawEntropy: Boolean) {
+                     drawEntropy: Boolean,
+                     setOperation: CommonSetOperation?,
+                     roundedGraph: Boolean) {
         _function = function
         _drawUnclearIndex = drawUnclearIndex
         _drawEntropy = drawEntropy
+        _setOperation = setOperation
 
         _min = _function.getMinX()
         _max = _function.getMaxX()
+
+
+        _steps = steps
 
         if (secondFunction != null) {
             _secondFunction = secondFunction
 
             _min = Math.min(_min, _secondFunction!!.getMinX())
             _max = Math.max(_max, _secondFunction!!.getMaxX())
-        }
 
-        _steps = steps
+            if (_setOperation != null) {
+                _setOperationStep = Math.min(
+                        _function.getMaxX() - _function.getMinX(),
+                        _secondFunction!!.getMaxX() - _secondFunction!!.getMinX()) / _steps
+
+                _setA = getFunctionSingletons(_function)
+                _setB = getFunctionSingletons(_secondFunction!!)
+                _setC = _setOperation!!.execute(_setA!!, _setB!!)
+                _roundedGraph = roundedGraph
+
+                _min = Math.min(_min, _setC!![0].xValue)
+                _max = Math.max(_max, _setC!![_setC!!.size - 1].xValue)
+            }
+        }
     }
 
 
@@ -200,9 +238,9 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         return distance
     }
 
+
     private fun calculateAffiliationSum(function: AffiliationFunction, steps: Int) =
             calculateDistance({ function.findAffiliationDegree(it) }, steps)
-
 
 
     private fun calculatePiAffiliationSum(function: PiEntropyAffiliationFunction, steps: Int) =
@@ -212,6 +250,7 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
 
     private fun calculateHamilgtonDistance(function: AffiliationFunction, steps: Int) =
             calculateDistance({ hamiltonDistance(_function, function, it)}, steps)
+
 
     private fun calculateEuclidDistance(function: AffiliationFunction, steps: Int) =
             calculateDistance({ euclidDistance(_function, function, it)}, steps)
@@ -270,6 +309,50 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
                     function = PiEntropyAffiliationFunction(function, calculateAffiliationSum(function, steps)),
                     steps = steps)
 
+
+    private fun getFunctionSingletons(function: AffiliationFunction): Array<Singleton> {
+        val list = ArrayList<Singleton>()
+        var value = function.getMinX()
+
+        val stepsCount = (( function.getMaxX() - function.getMinX() ) / _setOperationStep).toInt()
+
+        for (i in 0..stepsCount) {
+            list.add(Singleton.of(
+                    affilationValue = function.findAffiliationDegree(value),
+                    xValue = value
+            ))
+
+            value += _setOperationStep
+        }
+
+        return list.toTypedArray()
+    }
+
+    private fun drawSingletons(singletos: Array<Singleton>, paint: Paint) {
+        var lastPoint = Point.of(
+                x = valueToPixels(singletos[0].xValue),
+                y = yValueToPixels(singletos[0].affilationValue)
+        )
+
+        var point: Point
+
+        for(i in 1 until singletos.size) {
+            point = Point.of(valueToPixels(singletos[i].xValue),
+                    yValueToPixels(singletos[i].affilationValue))
+
+            drawLine(lastPoint, point, paint)
+            lastPoint = point
+
+            if (i < singletos.size - 1 && !_roundedGraph
+                    && singletos[i].affilationValue != singletos[i + 1].affilationValue) {
+                val middlePoint = Point.of(valueToPixels(singletos[i].xValue),
+                        yValueToPixels(singletos[i + 1].affilationValue))
+
+                drawLine(lastPoint, middlePoint, paint)
+                lastPoint = middlePoint
+            }
+        }
+    }
 
 
     private fun valueToPixels(value: Double): Int {

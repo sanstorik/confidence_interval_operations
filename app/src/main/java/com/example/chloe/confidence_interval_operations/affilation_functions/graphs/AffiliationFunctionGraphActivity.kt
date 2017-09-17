@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import com.example.chloe.confidence_interval_operations.R
 import com.example.chloe.confidence_interval_operations.affilation_functions.*
+import com.example.chloe.confidence_interval_operations.set_operations.CommonSetOperation
 import kotlinx.android.synthetic.main.activity_affiliation_function_graph.*
+import kotlinx.android.synthetic.main.activity_triangular_number_graph.*
+import kotlinx.android.synthetic.main.affiliation_function_graph_item.*
 
 class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
@@ -23,6 +25,7 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
         var steps = 0
         var drawIndex = false
         var entropy = false
+        var roundedGraph = false
 
         if (intent.extras != null) {
 
@@ -51,6 +54,8 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
             var piLookALike: PiLookAlikeAffiliationFunction? = null
             var laplas: LaplasAffiliationFunction? = null
             var square: SquareAffiliationFunction? = null
+
+            var setOperation: CommonSetOperation? = null
 
 
             if (triangularSecond != null) {
@@ -93,14 +98,20 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
                 square = SquareAffiliationFunction(a = 1.0, b = 8.0)
 
+                roundedGraph = bundle.getBoolean("graphRounded")
+                setOperation = bundle.getSerializable("setOperation") as CommonSetOperation?
+
             } else if (bundle.getBoolean("unclearIndexChecked")) {
                 drawIndex = true
             } else if (bundle.getBoolean("entropyChecked")) {
                 entropy = true
             }
 
-            _functionsAdapter = AffiliationFunctionPagerAdapter(supportFragmentManager,
-                    steps, drawIndex, entropy)
+            _functionsAdapter = AffiliationFunctionPagerAdapter(
+                    fragmentManager = supportFragmentManager, _steps = steps,
+                    _drawClearIndex = drawIndex, _entropy = entropy,
+                    _roundedGraph = roundedGraph, _setOperation = setOperation
+            )
 
             _functionsAdapter.add(TriangularAffiliationFunction(a = triangularValues[0],
                     b = triangularValues[1], c = triangularValues[2]), triangular)
@@ -158,12 +169,13 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
         }
     }
 
-
     class AffiliationFunctionPagerAdapter (
             fragmentManager: FragmentManager,
             private val _steps: Int,
             private val _drawClearIndex: Boolean,
-            private val _entropy: Boolean
+            private val _entropy: Boolean,
+            private val _roundedGraph: Boolean,
+            private val _setOperation: CommonSetOperation?
     ): FragmentStatePagerAdapter(fragmentManager) {
 
         private val _functions = ArrayList<AffiliationFunction>()
@@ -180,6 +192,11 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
             bundle.putInt("steps", _steps)
             bundle.putBoolean("unclearIndex", _drawClearIndex)
             bundle.putBoolean("entropy", _entropy)
+            bundle.putBoolean("roundedGraph", _roundedGraph)
+
+            if (_setOperation != null) {
+                bundle.putSerializable("setOperation", _setOperation)
+            }
 
 
             fragment.arguments = bundle
@@ -207,10 +224,12 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
             val secondFunction = arguments.getSerializable("secondFunction")
             val steps = arguments.getInt("steps")
             val drawIndex = arguments.getBoolean("unclearIndex")
-            var drawEntropy = arguments.getBoolean("entropy")
+            val drawEntropy = arguments.getBoolean("entropy")
+            val roundedGraph = arguments.getBoolean("roundedGraph")
+            val operation = arguments.getSerializable("setOperation") as CommonSetOperation?
 
             view.findViewById<AffiliationFunctionGraphView>(
-                    R.id.affiliation_function_gv
+                    R.id.affiliation_function_graphView
             ).startingInit(function,
                     if (secondFunction == null){
                         null
@@ -219,7 +238,10 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
                     },
                     steps = steps,
                     drawUnclearIndex = drawIndex,
-                    drawEntropy = drawEntropy)
+                    drawEntropy = drawEntropy,
+                    setOperation = operation,
+                    roundedGraph = roundedGraph
+            )
 
             return view
         }
