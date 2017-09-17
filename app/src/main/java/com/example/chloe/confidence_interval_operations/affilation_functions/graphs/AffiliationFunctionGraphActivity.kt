@@ -22,6 +22,7 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
         var steps = 0
         var drawIndex = false
+        var entropy = false
 
         if (intent.extras != null) {
 
@@ -94,10 +95,12 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
 
             } else if (bundle.getBoolean("unclearIndexChecked")) {
                 drawIndex = true
+            } else if (bundle.getBoolean("entropyChecked")) {
+                entropy = true
             }
 
             _functionsAdapter = AffiliationFunctionPagerAdapter(supportFragmentManager,
-                    steps, drawIndex)
+                    steps, drawIndex, entropy)
 
             _functionsAdapter.add(TriangularAffiliationFunction(a = triangularValues[0],
                     b = triangularValues[1], c = triangularValues[2]), triangular)
@@ -159,7 +162,8 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
     class AffiliationFunctionPagerAdapter (
             fragmentManager: FragmentManager,
             private val _steps: Int,
-            private val drawClearIndex: Boolean
+            private val _drawClearIndex: Boolean,
+            private val _entropy: Boolean
     ): FragmentStatePagerAdapter(fragmentManager) {
 
         private val _functions = ArrayList<AffiliationFunction>()
@@ -174,7 +178,8 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
             bundle.putSerializable("function", _functions[position])
             bundle.putSerializable("secondFunction", _secondFunctions[position])
             bundle.putInt("steps", _steps)
-            bundle.putBoolean("unclearIndex", drawClearIndex)
+            bundle.putBoolean("unclearIndex", _drawClearIndex)
+            bundle.putBoolean("entropy", _entropy)
 
 
             fragment.arguments = bundle
@@ -202,6 +207,7 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
             val secondFunction = arguments.getSerializable("secondFunction")
             val steps = arguments.getInt("steps")
             val drawIndex = arguments.getBoolean("unclearIndex")
+            var drawEntropy = arguments.getBoolean("entropy")
 
             view.findViewById<AffiliationFunctionGraphView>(
                     R.id.affiliation_function_gv
@@ -212,7 +218,8 @@ class AffiliationFunctionGraphActivity : AppCompatActivity() {
                         secondFunction as AffiliationFunction
                     },
                     steps = steps,
-                    drawUnclearIndex = drawIndex)
+                    drawUnclearIndex = drawIndex,
+                    drawEntropy = drawEntropy)
 
             return view
         }

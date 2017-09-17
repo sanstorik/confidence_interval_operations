@@ -7,6 +7,8 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import com.example.chloe.confidence_interval_operations.affilation_functions.AffiliationFunction
 import com.example.chloe.confidence_interval_operations.affilation_functions.ClearSetAffiliationFunction
+import com.example.chloe.confidence_interval_operations.affilation_functions.EntropyHAffiliationFunction
+import com.example.chloe.confidence_interval_operations.affilation_functions.PiEntropyAffiliationFunction
 import com.example.chloe.confidence_interval_operations.interval_graph.CustomGraphView
 import com.example.chloe.confidence_interval_operations.interval_graph.Point
 
@@ -28,6 +30,8 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
     private var _steps = 70
     private var _drawUnclearIndex = false
     private lateinit var _clearSet: ClearSetAffiliationFunction
+
+    private var _drawEntropy = false
 
     private val _funcPaint = Paint()
     private val _secondFuncPaint = Paint()
@@ -92,6 +96,16 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
             drawText("Square index = ${ ((2 / Math.sqrt(_steps.toDouble()))
                     * euclidDistance) }", getCornerPoint(Corners.TOP_RIGHT),
                     offsetY = 65, offsetX = -350)
+        } else if (_drawEntropy) {
+            val entropy  = calculateEntropy(_function, _steps)
+            drawText("Entropy =  $entropy", getCornerPoint(Corners.TOP_RIGHT),
+                    offsetY = 65, offsetX = -350)
+
+            drawFunction(PiEntropyAffiliationFunction(_function,
+                    calculateAffiliationSum(_function, _steps)), _euclidDistancePaint)
+
+            drawFunction(EntropyHAffiliationFunction(_function,
+                    calculateAffiliationSum(_function, _steps)), _hamilgtonDistancePaint)
         }
     }
 
@@ -99,23 +113,23 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
     fun startingInit(function: AffiliationFunction,
                      secondFunction: AffiliationFunction? = null,
                      steps: Int = 0,
-                     drawUnclearIndex: Boolean) {
+                     drawUnclearIndex: Boolean,
+                     drawEntropy: Boolean) {
         _function = function
         _drawUnclearIndex = drawUnclearIndex
+        _drawEntropy = drawEntropy
 
         _min = _function.getMinX()
         _max = _function.getMaxX()
 
         if (secondFunction != null) {
             _secondFunction = secondFunction
-            _steps = steps
 
             _min = Math.min(_min, _secondFunction!!.getMinX())
             _max = Math.max(_max, _secondFunction!!.getMaxX())
         }
 
-        _min *=  if (areTheSameSign(_min, _max)) 0.85 else 1.35
-        _max *= 1.15
+        _steps = steps
     }
 
 
@@ -172,18 +186,28 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         }
     }
 
+
     private fun calculateDistance(distanceCalc: (_value: Double) -> Double, steps: Int): Double {
         var value = _min
         val step = getFunctionLengthX() / steps
         var distance = 0.0
 
-        while(value < _max) {
+        while(value <= _max) {
+            distance += distanceCalc(value)
             value += step
-            distance += Math.abs(distanceCalc(value))
         }
 
         return distance
     }
+
+    private fun calculateAffiliationSum(function: AffiliationFunction, steps: Int) =
+            calculateDistance({ function.findAffiliationDegree(it) }, steps)
+
+
+
+    private fun calculatePiAffiliationSum(function: PiEntropyAffiliationFunction, steps: Int) =
+            calculateDistance({ function.findAffiliationDegree(it)  *
+                   Math.log( function.findAffiliationDegree(it)) }, steps)
 
 
     private fun calculateHamilgtonDistance(function: AffiliationFunction, steps: Int) =
@@ -239,6 +263,12 @@ class AffiliationFunctionGraphView @JvmOverloads constructor(
         return Math.pow((firstFunc.findAffiliationDegree(xValue) -
                 secondFunc.findAffiliationDegree(xValue)), 2.0)
     }
+
+    private fun calculateEntropy(function: AffiliationFunction, steps: Int) =
+            (1 / Math.log(steps.toDouble())) *
+            calculatePiAffiliationSum(
+                    function = PiEntropyAffiliationFunction(function, calculateAffiliationSum(function, steps)),
+                    steps = steps)
 
 
 

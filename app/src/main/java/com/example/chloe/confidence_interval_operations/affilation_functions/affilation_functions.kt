@@ -272,7 +272,7 @@ class SquareAffiliationFunction (
 }
 
 
-class ClearSetAffiliationFunction(
+class ClearSetAffiliationFunction (
         private val _func: AffiliationFunction
 ): AffiliationFunction {
 
@@ -286,6 +286,33 @@ class ClearSetAffiliationFunction(
     override fun getMaxX() = _func.getMaxX()
 
     override val description = "clear set"
+}
+
+
+open class PiEntropyAffiliationFunction (
+        private val _func: AffiliationFunction,
+        private val _sumOfAllAffiliation: Double
+): AffiliationFunction {
+
+    override fun findAffiliationDegree(x: Double) =
+            (_func.findAffiliationDegree(x) + 0.00001)/ _sumOfAllAffiliation
+
+    override fun getMinX() = -20.0
+
+    override fun getMaxX() = 20.0
+
+    override val description = "Pi entropy"
+}
+
+
+class EntropyHAffiliationFunction (
+        _func: AffiliationFunction,
+        _sumOfAllAffiliation: Double
+): PiEntropyAffiliationFunction(_func, _sumOfAllAffiliation) {
+
+    override fun findAffiliationDegree(x: Double) =
+            super.findAffiliationDegree(x) * Math.log(super.findAffiliationDegree(x))
+    
 }
 
 

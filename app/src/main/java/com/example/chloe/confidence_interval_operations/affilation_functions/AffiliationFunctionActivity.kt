@@ -60,6 +60,8 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
             bundle.putDoubleArray("generalizedSecond", getSecondGeneralizedArray())
         } else if (unclearIndex_switch.isChecked) {
             bundle.putBoolean("unclearIndexChecked", true)
+        } else if (entropy_switch.isChecked) {
+            bundle.putBoolean("entropyChecked", true)
         }
 
         intent.putExtra("bundle", bundle)
