@@ -1,18 +1,17 @@
 package com.example.chloe.confidence_interval_operations.affilation_functions.graphs
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import android.util.Log
-import android.view.*
+import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.chloe.confidence_interval_operations.R
 import com.example.chloe.confidence_interval_operations.affilation_functions.*
 import com.example.chloe.confidence_interval_operations.set_operations.CommonSetOperation
 import kotlinx.android.synthetic.main.activity_affiliation_function_graph.*
-import kotlinx.android.synthetic.main.activity_triangular_number_graph.*
-import kotlinx.android.synthetic.main.affiliation_function_graph_item.*
 
 class AffiliationFunctionGraphActivity : AppCompatActivity() {
 

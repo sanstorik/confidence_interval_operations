@@ -2,8 +2,8 @@ package com.example.chloe.confidence_interval_operations.affilation_functions
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -12,8 +12,7 @@ import com.example.chloe.confidence_interval_operations.affilation_functions.gra
 import com.example.chloe.confidence_interval_operations.set_operations.*
 import kotlinx.android.synthetic.main.activity_affiliation_function.*
 
-class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView {
-    private val _presenter by lazy { AffiliationFunctionActivityPresenter(this) }
+class AffiliationFunctionActivity : AppCompatActivity() {
     private var _setOperation: CommonSetOperation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,9 +135,4 @@ class AffiliationFunctionActivity : AppCompatActivity(), AffiliationFunctionView
             doubleArrayOf(a_1_et.text.toString().toDouble(),
                     b_1_et.text.toString().toDouble(),
                     c_1_et.text.toString().toDouble())
-}
-
-
-internal interface AffiliationFunctionView {
-
 }

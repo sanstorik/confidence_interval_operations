@@ -6,7 +6,7 @@ import kotlin.collections.HashMap
 
 abstract class CommonSetOperation: Serializable {
 
-    protected abstract var _operation: (Double, Double) -> Double
+    protected abstract val _operation: (Double, Double) -> Double
 
     fun execute(firstOperand: Array<Singleton>, secondOperand: Array<Singleton>):
             Array<Singleton> {
@@ -61,30 +61,30 @@ abstract class CommonSetOperation: Serializable {
 
 
 class AddingSetOperation: CommonSetOperation() {
-    override var _operation: (Double, Double) -> Double = {one, two -> one + two}
+    override val _operation: (Double, Double) -> Double = {one, two -> one + two}
 }
 
 
 class SubstractingSetOperation: CommonSetOperation() {
-    override var _operation: (Double, Double) -> Double = {one, two -> one - two}
+    override val _operation: (Double, Double) -> Double = {one, two -> one - two}
 }
 
 
 class DividingSetOperation: CommonSetOperation() {
-    override var _operation: (Double, Double) -> Double = {one, two -> one / two}
+    override val _operation: (Double, Double) -> Double = {one, two -> one / two}
 }
 
 
 class MultiplySetOperation: CommonSetOperation() {
-    override var _operation: (Double, Double) -> Double = {one, two -> one * two}
+    override val _operation: (Double, Double) -> Double = {one, two -> one * two}
 }
 
 
 class MaxSetOperation: CommonSetOperation() {
-    override var _operation: (Double, Double) -> Double = {one, two -> Math.max(one, two)}
+    override val _operation: (Double, Double) -> Double = {one, two -> Math.max(one, two)}
 }
 
 
 class MinSetOperation: CommonSetOperation() {
-    override var _operation: (Double, Double) -> Double = {one, two -> Math.min(one, two)}
+    override val _operation: (Double, Double) -> Double = {one, two -> Math.min(one, two)}
 }

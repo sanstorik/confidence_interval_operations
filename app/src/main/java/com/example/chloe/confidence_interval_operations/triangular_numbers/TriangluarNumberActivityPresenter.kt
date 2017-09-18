@@ -1,6 +1,5 @@
 package com.example.chloe.confidence_interval_operations.triangular_numbers
 
-import android.util.Log
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.AddingTriangluarNumbersOperation
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangleTransaction
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangularNumber

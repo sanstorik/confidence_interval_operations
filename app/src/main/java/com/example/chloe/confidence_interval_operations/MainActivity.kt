@@ -2,12 +2,10 @@ package com.example.chloe.confidence_interval_operations
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.operations.*
 import com.example.chloe.confidence_interval_operations.interval_array_input.ConfidenceArrayListActivity
 import com.example.chloe.confidence_interval_operations.interval_graph.IntervalGraphActivity

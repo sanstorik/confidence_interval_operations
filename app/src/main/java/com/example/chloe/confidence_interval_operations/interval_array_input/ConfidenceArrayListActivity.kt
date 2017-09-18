@@ -1,18 +1,15 @@
 package com.example.chloe.confidence_interval_operations.interval_array_input
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.TextView
 import com.example.chloe.confidence_interval_operations.MainActivity
-
 import com.example.chloe.confidence_interval_operations.R
-import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.Interval
 import kotlinx.android.synthetic.main.activity_confidence_array_list.*
 

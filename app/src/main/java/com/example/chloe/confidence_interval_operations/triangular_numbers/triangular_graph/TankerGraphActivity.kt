@@ -1,14 +1,14 @@
 package com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.*
-import android.util.Log
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.chloe.confidence_interval_operations.R
-import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangleTransaction
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangularNumber
 import kotlinx.android.synthetic.main.activity_tanker_graph.*
 

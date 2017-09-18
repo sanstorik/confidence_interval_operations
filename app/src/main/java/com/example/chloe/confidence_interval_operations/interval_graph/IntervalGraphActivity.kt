@@ -1,11 +1,9 @@
 package com.example.chloe.confidence_interval_operations.interval_graph
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-
+import android.support.v7.app.AppCompatActivity
 import com.example.chloe.confidence_interval_operations.R
 import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
-import com.example.chloe.confidence_interval_operations.confidence_operations.Interval
 import kotlinx.android.synthetic.main.activity_interval_graph_activity.*
 
 class IntervalGraphActivity : AppCompatActivity() {
