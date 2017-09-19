@@ -10,8 +10,8 @@ class TankerFuelActivityPresenter(private val _view: TankerFuelActivityView) {
     private val _numbers = ArrayList<TriangularNumber>()
 
     fun graphButtonOnClick() {
-        if (_view.fuelLevel == null || _view.fuelLevel!! <= 100.0) {
-            _view.showErrorMessage("Fuel level should be above 100")
+        if (_view.fuelLevel == null || _view.fuelLevel!! < 300.0) {
+            _view.showErrorMessage("Fuel level should be above or equal 300")
             return
         }
 
@@ -49,8 +49,8 @@ class TankerFuelActivityPresenter(private val _view: TankerFuelActivityView) {
     private fun getRandomTriangularFuelQuery(): TriangularNumber {
         val fuelLevel = _fuelLevel.toInt()
 
-        val leftBound = random(50, 50 + fuelLevel / 10)
-        val rightBound = random(leftBound + fuelLevel / 10, fuelLevel / 2)
+        val leftBound = random(50, 51 + fuelLevel / 10)
+        val rightBound = random(leftBound + fuelLevel / 10, fuelLevel / 3 + leftBound)
         val mid = random(leftBound, rightBound)
 
         return TriangularNumber.of(leftBound.toDouble(), mid.toDouble(), rightBound.toDouble())

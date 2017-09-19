@@ -2,8 +2,8 @@ package com.example.chloe.confidence_interval_operations.triangular_numbers
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.example.chloe.confidence_interval_operations.R
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph.TankerGraphActivity
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangularNumber

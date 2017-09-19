@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 import com.example.chloe.confidence_interval_operations.affilation_functions.AffiliationFunction
 import com.example.chloe.confidence_interval_operations.affilation_functions.ClearSetAffiliationFunction
 import com.example.chloe.confidence_interval_operations.affilation_functions.EntropyHAffiliationFunction

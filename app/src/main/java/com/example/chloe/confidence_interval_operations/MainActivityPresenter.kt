@@ -1,6 +1,5 @@
 package com.example.chloe.confidence_interval_operations
 
-import android.util.Log
 import com.example.chloe.confidence_interval_operations.confidence_operations.ClearNumber
 import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.Interval

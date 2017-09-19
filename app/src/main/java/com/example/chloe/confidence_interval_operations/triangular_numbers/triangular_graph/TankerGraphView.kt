@@ -3,8 +3,6 @@ package com.example.chloe.confidence_interval_operations.triangular_numbers.tria
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.util.Log
-import com.example.chloe.confidence_interval_operations.interval_graph.Point
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangularNumber
 
 class TankerGraphView @JvmOverloads constructor(

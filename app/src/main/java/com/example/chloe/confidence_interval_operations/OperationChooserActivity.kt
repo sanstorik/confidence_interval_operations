@@ -1,8 +1,8 @@
 package com.example.chloe.confidence_interval_operations
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.example.chloe.confidence_interval_operations.affilation_functions.AffiliationFunctionActivity
 import com.example.chloe.confidence_interval_operations.triangular_numbers.TankerFuelActivity
 import com.example.chloe.confidence_interval_operations.triangular_numbers.TriangularNumberActivity

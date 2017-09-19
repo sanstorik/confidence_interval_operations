@@ -230,9 +230,9 @@ class PiLookAlikeAffiliationFunction (
     override fun findAffiliationDegree(x: Double) =
             _left.findAffiliationDegree(x) * _right.findAffiliationDegree(x)
 
-    override fun getMinX() = 0.0
+    override fun getMinX() = -5.0
 
-    override fun getMaxX() = 10.0
+    override fun getMaxX() = 15.0
 
     override val description = "P-подібна функція"
 }
@@ -245,9 +245,9 @@ class LaplasAffiliationFunction (
     override fun findAffiliationDegree(x: Double) =
             Math.exp(- (Math.abs(x - b) / d) )
 
-    override fun getMinX() = -20.0
+    override fun getMinX() = -30.0
 
-    override fun getMaxX() = 20.0
+    override fun getMaxX() = 30.0
 
     override val description = "Лапласівська функція"
 }

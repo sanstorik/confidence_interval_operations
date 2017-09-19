@@ -1,11 +1,9 @@
 package com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-
+import android.support.v7.app.AppCompatActivity
 import com.example.chloe.confidence_interval_operations.R
 import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangleTransaction
-import com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_operations.TriangularNumber
 import kotlinx.android.synthetic.main.activity_triangular_number_graph.*
 
 class TriangularNumberGraphActivity : AppCompatActivity() {

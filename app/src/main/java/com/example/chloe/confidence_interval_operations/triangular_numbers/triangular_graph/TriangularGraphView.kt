@@ -1,7 +1,9 @@
 package com.example.chloe.confidence_interval_operations.triangular_numbers.triangular_graph
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
 import com.example.chloe.confidence_interval_operations.interval_graph.CustomGraphView
 import com.example.chloe.confidence_interval_operations.interval_graph.Point
