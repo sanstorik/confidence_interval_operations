@@ -15,21 +15,27 @@ import kotlinx.android.synthetic.main.activity_tanker_graph.*
 class TankerGraphActivity : FragmentActivity() {
 
     private val _adapter by lazy { TankerGraphPagerAdapter(supportFragmentManager) }
-    private lateinit var _numbers: Array<TriangularNumber>
+   // private lateinit var _numbers: Array<TriangularNumber>
+
+    private var _numbersList = ArrayList<TriangularNumber>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tanker_graph)
 
         if (intent.extras != null && intent.extras.getBundle("arr") != null) {
-            _numbers = intent.extras.getBundle("arr")
-                    .getSerializable("arr") as Array<TriangularNumber>
+            val arr = intent.extras.getBundle("arr")
+                    .getSerializable("arr") as Array<Any>
+
+            arr.forEach {
+                _numbersList.add(it as TriangularNumber)
+            }
         }
 
         graphViewPager_vp.adapter = _adapter
 
-        for (i in 0 until _numbers.size step 2) {
-            _adapter.add(_numbers[i], _numbers[i + 1])
+        for (i in 0 until _numbersList.size step 2) {
+            _adapter.add(_numbersList[i], _numbersList[i + 1])
         }
     }
 
