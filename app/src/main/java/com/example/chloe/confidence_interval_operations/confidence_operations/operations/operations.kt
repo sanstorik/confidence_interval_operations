@@ -1,8 +1,10 @@
 package com.example.chloe.confidence_interval_operations.confidence_operations.operations
 
+import android.util.Log
 import com.example.chloe.confidence_interval_operations.confidence_operations.ClearNumber
 import com.example.chloe.confidence_interval_operations.confidence_operations.ConfidenceInterval
 import com.example.chloe.confidence_interval_operations.confidence_operations.Interval
+import java.util.*
 
 public enum class OperationType {
     BINARY_OPERATION, UNARY_OPERATION, MULTIPLE_OPERATION
@@ -174,17 +176,40 @@ class MultipleIntervalMultiplyOperation: MultipleIntervalOperation {
         }
 
         val result = ArrayList<Double>()
+        val bitsArray = Array(
+                size = Math.pow(2.0, intervals.size.toDouble()).toInt(),
+                init = {
+                    index -> decimalValueToBinaryArray(decimalValue = index,
+                        maxCharacters = intervals.size)
+                }
+        )
 
-        for (i in 0 until intervals.size) {
-            for (j in i + 1 until intervals.size) {
-                result.addAll(getMultiplySequence(intervals[i], intervals[j]))
+        var value = 1.0
+        for (i in 0 until bitsArray.size) {
+            for (j in 0 until bitsArray[i].size) {
+                value *= intervals[j].boundArray[bitsArray[i][j]]
             }
+
+            result.add(value)
+            value = 1.0
         }
 
         return ConfidenceInterval.of(
                 leftBound = result.min()!!,
                 rightBound = result.max()!!
         )
+    }
+
+    private fun decimalValueToBinaryArray(decimalValue: Int, maxCharacters: Int): IntArray {
+        val array = IntArray(maxCharacters)
+
+        val binaryValue = decimalValue.toString(2).reversed()
+
+        binaryValue.forEachIndexed { index, c ->
+            array[array.size - index - 1] = c.toString().toInt()
+        }
+
+        return array
     }
 }
 

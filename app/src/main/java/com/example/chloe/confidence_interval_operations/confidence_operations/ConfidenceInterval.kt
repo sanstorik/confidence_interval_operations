@@ -7,6 +7,8 @@ class ConfidenceInterval private constructor(
     override val leftBound = _leftBound
     override val rightBound = _rightBound
 
+    override val boundArray = doubleArrayOf(leftBound, rightBound)
+
     override fun equals(other: Any?) = when {
         other === this ->  true
         other?.javaClass != javaClass -> false

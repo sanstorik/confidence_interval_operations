@@ -4,6 +4,8 @@ class ClearNumber private constructor(val number: Double): Interval {
     override val leftBound = number;
     override val rightBound = number;
 
+    override val boundArray = doubleArrayOf(leftBound, rightBound)
+
     override fun equals(other: Any?) = when {
         this === other -> true;
         javaClass != other?.javaClass -> false
